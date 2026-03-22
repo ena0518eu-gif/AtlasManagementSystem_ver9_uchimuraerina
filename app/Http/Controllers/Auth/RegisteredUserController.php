@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\Request;
+use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
@@ -30,20 +30,24 @@ class RegisteredUserController extends Controller
     /**
      * Handle an incoming registration request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\RegisterRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
         DB::beginTransaction();
+
         try{
             $old_year = $request->old_year;
             $old_month = $request->old_month;
             $old_day = $request->old_day;
+
+            // 日付結合
             $data = $old_year . '-' . $old_month . '-' . $old_day;
             $birth_day = date('Y-m-d', strtotime($data));
+
             $subjects = $request->subject;
 
             $user_get = User::create([
@@ -57,14 +61,26 @@ class RegisteredUserController extends Controller
                 'role' => $request->role,
                 'password' => bcrypt($request->password)
             ]);
+
             if($request->role == 4){
                 $user = User::findOrFail($user_get->id);
-                $user->subjects()->attach($subjects);
+
+                // subjectsがnullの場合の安全対策
+                if (!empty($subjects)) {
+                    $user->subjects()->attach($subjects);
+                }
             }
+
             DB::commit();
+
             return view('auth.login.login');
+
         }catch(\Exception $e){
             DB::rollback();
+
+            // 本番用ログ（デバッグ用）
+            \Log::error($e);
+
             return redirect()->route('loginView');
         }
     }

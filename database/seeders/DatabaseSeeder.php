@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,8 +16,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // Register your seeders here
-        $this->call([
+        // UsersTableSeeder を呼び出す(追記)
+        $this->call(UsersTableSeeder::class);
 
-        ]);
-    }
+        }
 }

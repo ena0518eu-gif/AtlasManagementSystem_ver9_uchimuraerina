@@ -1,0 +1,9 @@
+/* サイドバー */
+.sidebar {
+  width: 150px;
+  /* height: 100vh; */
+  min-height: 100%;
+  /* ← 追加：コンテンツが長くなっても伸びる */
+  background-color: #03AAD2;
+  font-weight: bold;
+}

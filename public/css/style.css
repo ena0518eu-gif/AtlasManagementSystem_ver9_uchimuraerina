@@ -19,23 +19,76 @@ li {
 /* サイドバー */
 .sidebar {
   width: 150px;
-  height: 100vh;
+  min-width: 150px;
+  /* ← 追加：縮まないように */
+  height: auto;
+  /* ← 100vh → auto に変更 */
+  min-height: 100vh;
   background-color: #03AAD2;
   font-weight: bold;
 }
 
 .main-container {
   width: 100%;
+
+  /* 調整：右余白＆全体バランス */
+  padding: 20px 60px;
 }
 
+/* ★追加：プロフィールページだけ左余白を消す */
+.profile-page .main-container {
+  padding-left: 0 !important;
+}
+
+/* サイドバーとの距離 */
+.d-flex {
+  gap: 30px;
+}
+
+/* サイドリンク */
 .sidebar p a {
   color: #FFF;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
 }
 
-/* トップページ */
+/* アイコン */
+.sidebar-icon {
+  height: 1em;
+  width: auto;
+  vertical-align: middle;
+  filter: brightness(0) invert(1);
+}
+
+
+/* タイトル：完全に左上＋間隔だけ管理 */
+/* タイトルを完全に左上固定（カードと切り離す） */
+.tittle {
+  position: relative;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+/* top_areaはカードだけ中央寄せにする */
+.top_area {
+  padding-top: 40px;
+  /* タイトルとの間隔だけ確保 */
+}
+
+
+
+/* プロフィールカード */
 .user_status {
   border-radius: 10px;
   background: #FFF;
+
+  max-width: 1100px;
+  width: 100%;
+
+  margin-left: 0;
+  margin-top: 60px;
 }
 
 /* スクール予約関連 */
@@ -270,7 +323,7 @@ li {
 
 .subject_edit_btn {
   font-size: 12px;
-  color: #0000FF;
+  /* color: #0000FF; */
   cursor: pointer;
 }
 

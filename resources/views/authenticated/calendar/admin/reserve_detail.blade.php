@@ -1,19 +1,34 @@
 <x-sidebar>
-<div class="vh-100 d-flex" style="align-items:center; justify-content:center;">
-  <div class="w-50 m-auto h-75">
-    <p><span>日</span><span class="ml-3">部</span></p>
-    <div class="h-75 border">
-      <table class="">
-        <tr class="text-center">
-          <th class="w-25">ID</th>
-          <th class="w-25">名前</th>
+
+<link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
+
+<div class="m-5">
+  <h5>{{ $date }} {{ $part == 1 ? '1部' : ($part == 2 ? '2部' : '3部') }}</h5>
+    <!-- <h5>{{ $date }} {{ $part == 1 ? 'リモ1部' : ($part == 2 ? 'リモ2部' : 'リモ3部') }} 予約者一覧</h5> -->
+
+
+  <table class="table mt-3 table-bordered table-striped">
+    <thead class="thead-custom">
+      <tr>
+        <th>ID</th>
+        <th>名前</th>
+        <th>場所</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach($reservePersons as $reserveSetting)
+        @foreach($reserveSetting->users as $user)
+        <tr>
+          <td>{{ $user->id }}</td>
+          <td>{{ $user->over_name }} {{ $user->under_name }}</td>
+          <td>リモート</td>
         </tr>
-        <tr class="text-center">
-          <td class="w-25"></td>
-          <td class="w-25"></td>
-        </tr>
-      </table>
-    </div>
-  </div>
+        @endforeach
+      @endforeach
+    </tbody>
+  </table>
+
+  <a href="{{ route('calendar.admin.show', ['user_id' => Auth::id()]) }}" class="btn btn-secondary mt-3">戻る</a>
 </div>
+
 </x-sidebar>

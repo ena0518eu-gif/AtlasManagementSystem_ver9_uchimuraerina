@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Throwable;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Auth\AuthenticationException;
 
 class Handler extends ExceptionHandler
 {
@@ -51,5 +52,19 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
         return parent::render($request, $exception);
+    }
+
+    /**
+     * 未認証（ログインタイムアウトなど）の場合にログイン画面へリダイレクト
+     */
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        // JSONリクエストなら401を返す
+        if ($request->expectsJson()) {
+            return response()->json(['message' => $exception->getMessage()], 401);
+        }
+
+        // ログイン画面へリダイレクト
+        return redirect()->route('login');
     }
 }

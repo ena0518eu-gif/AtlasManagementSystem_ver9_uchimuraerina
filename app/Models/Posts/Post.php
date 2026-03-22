@@ -24,11 +24,17 @@ class Post extends Model
     }
 
     public function subCategories(){
-        // リレーションの定義
+        // 投稿とサブカテゴリー中間テーブル
+        return $this->hasMany('App\Models\Posts\PostSubCategory', 'post_id', 'id');
     }
 
     // コメント数
     public function commentCounts($post_id){
         return Post::with('postComments')->find($post_id)->postComments();
+    }
+
+    // いいねリレーションを追加
+    public function likes(){
+        return $this->hasMany('App\Models\Posts\Like', 'like_post_id');
     }
 }

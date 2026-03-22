@@ -35,4 +35,18 @@ class CalendarController extends Controller
         }
         return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
     }
+
+    // キャンセル機能
+    public function cancel(Request $request){
+        DB::beginTransaction();
+        try{
+            $reserve_settings = ReserveSettings::findOrFail($request->reserve_id);
+            $reserve_settings->increment('limit_users');
+            $reserve_settings->users()->detach(Auth::id());
+            DB::commit();
+        }catch(\Exception $e){
+            DB::rollback();
+        }
+        return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
+    }
 }

@@ -8,6 +8,7 @@ use App\Models\Categories\MainCategory;
 use App\Models\Categories\SubCategory;
 use App\Models\Posts\Post;
 use App\Models\Posts\PostComment;
+use App\Models\Posts\PostSubCategory;
 use App\Models\Posts\Like;
 use App\Models\Users\User;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
@@ -17,7 +18,10 @@ class PostsController extends Controller
 {
     public function show(Request $request){
         $posts = Post::with('user', 'postComments')->get();
-        $categories = MainCategory::get();
+
+        // （サブカテゴリ取得）
+        $categories = MainCategory::with('subCategories')->get();
+
         $like = new Like;
         $post_comment = new Post;
         if(!empty($request->keyword)){
@@ -39,12 +43,13 @@ class PostsController extends Controller
     }
 
     public function postDetail($post_id){
-        $post = Post::with('user', 'postComments')->findOrFail($post_id);
+        // subCategories.subCategory までwithで取得
+        $post = Post::with('user', 'postComments', 'subCategories.subCategory')->findOrFail($post_id);
         return view('authenticated.bulletinboard.post_detail', compact('post'));
     }
 
     public function postInput(){
-        $main_categories = MainCategory::get();
+        $main_categories = MainCategory::with('subCategories')->get();
         return view('authenticated.bulletinboard.post_create', compact('main_categories'));
     }
 
@@ -54,10 +59,38 @@ class PostsController extends Controller
             'post_title' => $request->post_title,
             'post' => $request->post_body
         ]);
+
+        // 選択されたサブカテゴリーを中間テーブルに登録
+        if($request->post_category_id){
+            $category_ids = is_array($request->post_category_id)
+                ? $request->post_category_id
+                : [$request->post_category_id];
+
+            foreach($category_ids as $sub_category_id){
+                PostSubCategory::create([
+                    'post_id' => $post->id,
+                    'sub_category_id' => $sub_category_id,
+                ]);
+            }
+        }
+
         return redirect()->route('post.show');
     }
 
     public function postEdit(Request $request){
+        // タイトルと投稿内容のバリデーション
+        $request->validate([
+            'post_title' => 'required|string|max:100',
+            'post_body' => 'required|string|max:2000',
+        ], [
+            'post_title.required' => 'タイトルは必ず入力してください。',
+            'post_title.string' => 'タイトルは文字列である必要があります。',
+            'post_title.max' => 'タイトルは100文字以内で入力してください。',
+            'post_body.required' => '投稿内容は必ず入力してください。',
+            'post_body.string' => '投稿内容は文字列である必要があります。',
+            'post_body.max' => '最大文字数は2000文字です。',
+        ]);
+
         Post::where('id', $request->post_id)->update([
             'post_title' => $request->post_title,
             'post' => $request->post_body,
@@ -69,12 +102,42 @@ class PostsController extends Controller
         Post::findOrFail($id)->delete();
         return redirect()->route('post.show');
     }
+
     public function mainCategoryCreate(Request $request){
+        // メインカテゴリーのバリデーション
+        $request->validate([
+            'main_category_name' => 'required',
+        ], [
+            'main_category_name.required' => 'メインカテゴリーは必ず入力してください。',
+        ]);
+
         MainCategory::create(['main_category' => $request->main_category_name]);
         return redirect()->route('post.input');
     }
 
+    public function subCategoryCreate(Request $request){
+        // サブカテゴリーのバリデーション
+        $request->validate([
+            'sub_category_name' => 'required',
+        ], [
+            'sub_category_name.required' => 'サブカテゴリーは必ず入力してください。',
+        ]);
+
+        SubCategory::create([
+            'main_category_id' => $request->main_category_id,
+            'sub_category' => $request->sub_category_name,
+        ]);
+        return redirect()->route('post.input');
+    }
+
     public function commentCreate(Request $request){
+        // コメントのバリデーション
+        $request->validate([
+            'comment' => 'required',
+        ], [
+            'comment.required' => 'コメントは必ず入力してください。',
+        ]);
+
         PostComment::create([
             'post_id' => $request->post_id,
             'user_id' => Auth::id(),

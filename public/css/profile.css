@@ -1,0 +1,116 @@
+@charset "utf-8";
+
+/* =========================
+  編集トリガー
+========================= */
+.subject_toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: #007bff;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* ホバーでわかりやすく */
+.subject_toggle:hover {
+  text-decoration: underline;
+}
+
+/* 矢印 */
+.arrow {
+  font-size: 12px;
+  transition: 0.2s;
+}
+
+/* =========================
+  スライド部分
+========================= */
+
+/* ★ style.cssのdisplay:noneを上書き */
+.subject_inner {
+  display: block !important;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+/* ★ 開いた状態（高さを大きくして切れ防止） */
+.subject_inner.open {
+  max-height: 1000px;
+  /* ← 修正：余裕を持たせる */
+  margin-top: 10px;
+}
+
+/* ★ 中身の余白 */
+.subject_inner form {
+  padding-top: 10px;
+}
+
+/* =========================
+  チェックボックス整列
+========================= */
+.subject_inner div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 5px 0;
+}
+
+/* チェックボックス少し大きく */
+.subject_inner input[type="checkbox"] {
+  transform: scale(1.1);
+}
+
+/* ボタン余白 */
+.subject_inner .btn {
+  margin-top: 10px;
+}
+
+/* 横並び（登録用） */
+.subject_row {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 5px;
+}
+
+/* 横並びのラベル */
+.subject_row label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* タイトルを左上固定
+.profile_title {
+  margin-left: 0px;
+  /* ← sidebarとの余白に合わせる */
+/* margin-top: 0px;
+  font-size: 18px;
+} */
+*/
+
+/* 外枠の余計な余白と枠線を消す */
+.vh-100.border {
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* main-containerの左余白を打ち消す */
+.main-container {
+  padding-left: 0 !important;
+}
+
+/* タイトルを完全に左上へ */
+.profile_title {
+  margin-left: 0 !important;
+  padding-left: 10px;
+  /* 微調整 */
+}
+
+/* main-containerの余白を消す（最優先） */
+.main-container {
+  padding: 0 !important;
+}

@@ -1,0 +1,344 @@
+/* ===============================
+   ユーザー検索 search.css
+================================= */
+
+/* 全体ラッパー */
+.search_content {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  border: none !important;
+  background: #ECF1F6;
+  padding: 0;
+  width: 100%;
+}
+
+/* ===============================
+   ユーザーカード一覧エリア
+================================= */
+
+.reserve_users_area {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  flex: 1;
+  height: 85vh;
+  overflow-y: scroll;
+  padding: 16px;
+  background: #ECF1F6;
+  border: none !important;
+  width: auto !important;
+  margin: 0 !important;
+  align-content: flex-start;
+}
+
+/* 個人カード */
+.one_person {
+  background: #FFFFFF;
+  border-radius: 10px;
+  border: none !important;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
+  font-size: 12px;
+  line-height: 2;
+  height: auto !important;
+  width: auto !important;
+}
+
+.one_person div {
+  margin: 0;
+}
+
+.one_person span {
+  font-size: 12px;
+  /* color: #333; */
+}
+
+/* 名前リンク：クリックでユーザー詳細画面へ遷移 */
+.one_person a {
+  color: #03AAD2;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.one_person a:hover {
+  text-decoration: underline;
+  color: #028fb0;
+}
+
+/* ===============================
+   検索フォームエリア（右）
+================================= */
+
+.search_area {
+  width: 280px !important;
+  min-width: 260px;
+  flex-shrink: 0;
+  background: transparent;
+  border: none !important;
+  padding: 20px 16px;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  height: 85vh;
+  overflow-y: auto;
+}
+
+/* 「検索」見出し*/
+.search_title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #134074;
+  margin-bottom: 14px;
+}
+
+/* テキスト入力（キーワード） */
+.free_word {
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  background: #DDE4EC;
+  margin-bottom: 14px;
+  color: #999;
+}
+
+.free_word:focus {
+  outline: none;
+  background: #FFF;
+  color: #333;
+}
+
+/* 各ブロック */
+.search_area>div {
+  margin-bottom: 12px;
+}
+
+/* ラベル*/
+.search_area>div>label {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  color: #134074;
+  margin-bottom: 6px;
+}
+
+/* セレクトボックス*/
+.search_area select {
+  width: 100%;
+  padding: 7px 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  background: #DDE4EC;
+  color: #333;
+  appearance: auto;
+}
+
+.search_area select:focus {
+  outline: none;
+  background: #FFF;
+}
+
+/* ===============================
+   アコーディオン（検索条件の追加）
+================================= */
+
+/* 検索条件の追加 */
+.search_conditions_toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: bold;
+  color: #134074;
+  background: #ECF1F6;
+  border: 1px solid #B0BEC5;
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+  padding: 8px 12px;
+  margin-bottom: 0;
+  user-select: none;
+}
+
+.search_conditions_toggle:hover {
+  background: #DDE4EC;
+}
+
+/* 矢印 */
+.search_conditions_toggle .arrow {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid #333;
+  border-bottom: 2px solid #333;
+  transform: rotate(45deg);
+  /* 閉時：下向き ∨ */
+  transition: transform 0.3s;
+  margin-bottom: 4px;
+}
+
+/* 開いているとき上向き矢印 */
+.search_conditions_toggle .arrow.open {
+  transform: rotate(-135deg);
+  /* 開時：上向き ∧ */
+  margin-bottom: -2px;
+}
+
+/* アコーディオン中身 */
+.search_conditions_inner {
+  display: none;
+  background: #ECF1F6;
+  border: 1px solid #B0BEC5;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  padding: 14px 12px;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.search_conditions_inner>div {
+  margin-bottom: 12px;
+}
+
+.search_conditions_inner>div:last-child {
+  margin-bottom: 0;
+}
+
+/* アコーディオン内ラベル（性別・権限・選択科目）
+.search_conditions_inner>div>label,
+.search_conditions_inner label:not(.subject_box label) {
+  font-size: 13px;
+  font-weight: bold;
+  color: #134074;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* 権限セレクト */
+.search_conditions_inner select {
+  width: 100%;
+  padding: 7px 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  background: #DDE4EC;
+  color: #333;
+  appearance: auto;
+}
+
+.search_conditions_inner select:focus {
+  outline: none;
+  background: #FFF;
+}
+
+/* 性別ラジオ */
+.search_conditions_inner span {
+  font-size: 12px;
+  color: #2C3E50;
+}
+
+.search_conditions_inner input[type="radio"] {
+  margin-right: 6px;
+  /* 〇と次の文字の間 */
+  margin-left: 2px;
+  /* 文字と〇の間 ←追加 */
+  accent-color: #03AAD2;
+}
+
+/* 選択科目チェックボックス（横並び） */
+.subject_box {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.subject_box label {
+  font-size: 12px;
+  font-weight: normal !important;
+  color: #2C3E50;
+  display: flex !important;
+  align-items: center;
+  gap: 4px;
+  margin: 0 !important;
+  cursor: pointer;
+}
+
+.subject_box input[type="checkbox"] {
+  accent-color: #03AAD2;
+}
+
+/* ===============================
+   ボタン（検索・リセット）
+================================= */
+
+/* 検索ボタン */
+.search_area input[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: none;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 6px;
+  background: #03AAD2;
+  color: #FFF;
+  transition: background 0.2s;
+}
+
+.search_area input[type="submit"]:hover {
+  background: #028fb0;
+}
+
+/* リセット */
+.search_area input[type="reset"] {
+  width: 100%;
+  padding: 6px;
+  border: none;
+  background: transparent;
+  color: #03AAD2;
+  font-size: 13px;
+  /* font-weight: bold; */
+  cursor: pointer;
+  margin-top: 8px;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.search_area input[type="reset"]:hover {
+  color: #028fb0;
+}
+
+/* リセットボタン（buttonタグ） */
+#resetBtn {
+  width: 100%;
+  padding: 6px;
+  border: none;
+  background: transparent;
+  color: #03AAD2;
+  font-size: 13px;
+  /* font-weight: bold; */
+  cursor: pointer;
+  margin-top: 8px;
+  text-align: center;
+  text-decoration: underline;
+}
+
+#resetBtn:hover {
+  color: #028fb0;
+}
+
+.student {
+  font-weight: bold;
+}
+
+/* 値だけ太字 */
+.value-bold {
+  font-weight: bold;
+}

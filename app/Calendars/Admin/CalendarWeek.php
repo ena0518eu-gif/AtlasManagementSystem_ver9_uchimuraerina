@@ -3,36 +3,36 @@ namespace App\Calendars\Admin;
 
 use Carbon\Carbon;
 
-class CalendarWeek{
-  protected $carbon;
-  protected $index = 0;
+class CalendarWeek {
 
-  function __construct($date, $index = 0){
+  protected $carbon;
+  protected $startDay;
+  protected $week;
+
+  function __construct($date, $week = 0){
     $this->carbon = new Carbon($date);
-    $this->index = $index;
+    $this->week = $week;
+    $this->startDay = $this->carbon->copy()->startOfMonth()->addWeeks($week)->startOfWeek();
   }
 
   function getClassName(){
-    return "week-" . $this->index;
+    return "week-" . $this->week;
   }
 
   function getDays(){
     $days = [];
-    $startDay = $this->carbon->copy()->startOfWeek();
-    $lastDay = $this->carbon->copy()->endOfWeek();
-    $tmpDay = $startDay->copy();
 
-    while($tmpDay->lte($lastDay)){
+    for($day = 0; $day < 7; $day++){
+      $tmpDay = $this->startDay->copy()->addDays($day);
+
+      // ← 月外の日はBlankDayに変更
       if($tmpDay->month != $this->carbon->month){
-        $day = new CalendarWeekBlankDay($tmpDay->copy());
-        $days[] = $day;
-        $tmpDay->addDay(1);
-        continue;
-       }
-       $day = new CalendarWeekDay($tmpDay->copy());
-       $days[] = $day;
-       $tmpDay->addDay(1);
+        $days[] = new CalendarWeekBlankDay($tmpDay);
+      }else{
+        $days[] = new CalendarWeekDay($tmpDay);
+      }
     }
+
     return $days;
   }
 }

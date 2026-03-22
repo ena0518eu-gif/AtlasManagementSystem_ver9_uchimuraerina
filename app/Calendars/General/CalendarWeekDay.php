@@ -25,25 +25,40 @@ class CalendarWeekDay{
    */
 
    function render(){
-     return '<p class="day">' . $this->carbon->format("j"). '日</p>';
+     return '<p class="day text-center">' . $this->carbon->format("j"). '日</p>'; // ← text-center追加
    }
 
    function selectPart($ymd){
+     $today = Carbon::today()->format('Y-m-d');
+
+     // 過去日または今日より前は受付終了
+     if($ymd < $today){
+       return '<p style="font-size:12px; color:#999;">受付終了</p>
+               <input type="hidden" name="getPart[]" value="" form="reserveParts">';
+     }
+
      $one_part_frame = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '1')->first();
      $two_part_frame = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '2')->first();
      $three_part_frame = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '3')->first();
+
+     // 予約枠が1つもない日は受付終了
+     if(!$one_part_frame && !$two_part_frame && !$three_part_frame){
+       return '<p style="font-size:12px; color:#999;">受付終了</p>
+               <input type="hidden" name="getPart[]" value="" form="reserveParts">';
+     }
+
      if($one_part_frame){
-       $one_part_frame = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '1')->first()->limit_users;
+       $one_part_frame = $one_part_frame->limit_users;
      }else{
        $one_part_frame = '0';
      }
      if($two_part_frame){
-       $two_part_frame = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '2')->first()->limit_users;
+       $two_part_frame = $two_part_frame->limit_users;
      }else{
        $two_part_frame = '0';
      }
      if($three_part_frame){
-       $three_part_frame = ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '3')->first()->limit_users;
+       $three_part_frame = $three_part_frame->limit_users;
      }else{
        $three_part_frame = '0';
      }

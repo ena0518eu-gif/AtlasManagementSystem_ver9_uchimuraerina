@@ -1,10 +1,21 @@
 <x-sidebar>
-<div class="w-100 vh-100 d-flex" style="align-items:center; justify-content:center;">
-  <div class="w-100 vh-100 border p-5">
-    {!! $calendar->render() !!}
-    <div class="adjust-table-btn m-auto text-right">
-      <input type="submit" class="btn btn-primary" value="登録" form="reserveSetting" onclick="return confirm('登録してよろしいですか？')">
+
+  <link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
+
+  <div class="w-75 m-auto">
+    <div class="w-100">
+      <p>{{ $calendar->getTitle() }}</p>
+
+      <!-- カレンダー表示 -->
+      {!! $calendar->render() !!}
+
     </div>
   </div>
-</div>
+
+  <!-- 登録ボタン -->
+  <div style="text-align:right; margin: 20px auto; width:75%;">
+    <button type="submit" form="reserveSetting" class="btn btn-primary"
+      onclick="return confirm('予約枠を登録してよろしいですか？')">登録</button>
+  </div>
+
 </x-sidebar>

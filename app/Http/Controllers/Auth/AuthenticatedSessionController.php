@@ -28,7 +28,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        $userdata = $request -> only('mail_address', 'password');
+ $userdata = $request -> only('mail_address', 'password');
         if (Auth::attempt($userdata)) {
             return redirect('top');
         }else{

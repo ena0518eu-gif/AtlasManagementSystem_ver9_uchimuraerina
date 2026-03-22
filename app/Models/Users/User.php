@@ -13,8 +13,7 @@ use Auth;
 class User extends Authenticatable
 {
     use Notifiable;
-    use softDeletes;
-
+    use SoftDeletes;
     // const CREATED_AT = null;
 
     /**
@@ -67,7 +66,13 @@ class User extends Authenticatable
     }
 
     public function subjects(){
-        return ;// リレーションの定義
+        return $this->belongsToMany(
+            'App\Models\Users\Subjects', // Subjectモデルの名前空間に合わせる
+            'subject_users',             // 中間テーブル名
+            'user_id',                   // Userモデル側の外部キー
+            'subject_id'                 // Subjectモデル側の外部キー
+        );
+        // リレーションの定義
     }
 
     // いいねしているかどうか

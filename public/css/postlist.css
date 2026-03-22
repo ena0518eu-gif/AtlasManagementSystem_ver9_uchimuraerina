@@ -1,0 +1,179 @@
+@charset "utf-8";
+
+/* メインカテゴリ */
+.main_category_header {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 8px 0;
+  background: none;
+  /* ←消す */
+  border-radius: 0;
+  /* font-weight: 600; */
+  font-size: 13px;
+  border-bottom: 1px solid #ddd;
+  /* ←線だけ */
+}
+
+/* 矢印 */
+.arrow {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid #333;
+  border-bottom: 2px solid #333;
+  transform: rotate(45deg);
+  /* 閉時：下向き ∨ */
+  transition: transform 0.3s;
+  margin-bottom: 4px;
+}
+
+/* 開いたとき */
+.main_categories.active .arrow {
+  transform: rotate(-135deg);
+  /* 開時：上向き ∧ */
+  margin-bottom: -2px;
+}
+
+/* サブカテゴリ */
+.sub_categories li {
+  padding: 3px 0;
+  font-size: 12px;
+  border-bottom: 1px solid #ddd;
+  /* ← 追加：下線 */
+  margin-right: 20px;
+  /* ← 追加：右側を短く */
+}
+
+/* 開いた状態 */
+.main_categories.active .sub_categories {
+  display: block;
+}
+
+
+/* 右エリア */
+.category_area {
+  background: none;
+  /* ←消す */
+  padding: 0;
+  border: none;
+}
+
+/* タイトル（線の中に置く） */
+.category_title {
+  font-weight: 500;
+  font-size: 13px;
+  color: #666;
+  margin: 15px 0 10px;
+  padding-top: 10px;
+  border-top: none;
+  /* ← 1px solid #ccc → none に変更 */
+}
+
+/* 投稿ボタン */
+.post_btn {
+  display: block;
+  background: #00a8cc;
+  color: #fff;
+  text-align: center;
+  padding: 6px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 12px;
+  width: 100%;
+}
+
+/* 検索エリア */
+.search_area {
+  display: flex;
+  gap: 5px;
+  margin-top: 5px;
+}
+
+/* 検索input（さらに弱く） */
+.search_area input[type="text"] {
+  flex: 1;
+  padding: 5px 8px;
+  font-size: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  /* ←もっと弱く */
+  outline: none;
+  background: #fff;
+}
+
+/* フォーカス */
+.search_area input[type="text"]:focus {
+  border-color: #bbb;
+}
+
+/* 検索ボタン */
+.search_area input[type="submit"] {
+  background: #007fa3;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+/* ボタン共通 */
+.category_btn {
+  display: block;
+  width: auto;
+  margin-top: 5px;
+  padding: 6px;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 12px;
+  border: none;
+  text-align: center;
+}
+
+/* いいね */
+.like_btn_custom {
+  background: #FF99CC
+}
+
+/* 自分 */
+.mypost_btn_custom {
+  background: #f5a623;
+}
+
+/* カテゴリリスト */
+.category_list {
+  margin-top: 5px;
+}
+
+/* メインカテゴリ */
+.main_categories {
+  margin-bottom: 5px;
+}
+
+/* サブカテゴリ */
+.sub_categories li {
+  padding: 3px 0;
+  font-size: 12px;
+  border-bottom: 1px solid #ddd;
+  /* ← 追加：下線 */
+}
+
+/* チェックボックス */
+.sub_categories input {
+  display: none;
+  /* ← チェックボックスを非表示 */
+}
+
+/* ボタン横並び */
+.btn_group {
+  display: flex;
+  gap: 10px;
+  border-bottom: none;
+  /* ← 追加 */
+}
+
+/* 横並び */
+.btn_group .category_btn {
+  flex: 1;
+  text-align: center;
+}
