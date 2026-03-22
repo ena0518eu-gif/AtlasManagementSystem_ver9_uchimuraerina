@@ -1,0 +1,63 @@
+/* ページ全体の背景色 */
+body {
+  /* background-color: #dce8f0 !important; */
+  margin: 0;
+  padding: 0;
+}
+
+.login-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #dce8f0;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-logo {
+  margin-bottom: 12px;
+}
+
+.login-logo img {
+  max-width: 120px;
+  height: auto;
+}
+
+.login-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  /* 上下のpaddingを小さく */
+  padding: 16px 40px 20px 40px;
+  /* 横幅を広く */
+  width: 360px;
+}
+
+/* Bootstrapの余白を上書き */
+.login-card .pt-3 {
+  padding-top: 12px !important;
+}
+
+.login-card .pt-4 {
+  padding-top: 12px !important;
+}
+
+.login-card .pt-5 {
+  padding-top: 12px !important;
+}
+
+.login-card .m-3 {
+  margin: 8px 0 8px 0 !important;
+}
+
+/* ログインボタンを小さく */
+.login-card .btn-primary {
+  padding: 4px 16px;
+  font-size: 13px;
+}

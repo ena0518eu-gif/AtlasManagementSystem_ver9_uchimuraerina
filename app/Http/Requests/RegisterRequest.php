@@ -34,7 +34,6 @@ class RegisterRequest extends FormRequest
 
             'sex' => ['required', 'in:1,2,3'],
 
-            // ★ 修正ポイント：stringで受ける（HTMLはstring）
             'old_year' => ['required', 'integer', 'between:1985,' . date('Y')],
             'old_month' => ['required', 'integer', 'between:1,12'],
             'old_day' => ['required', 'integer', 'between:1,31'],
@@ -72,9 +71,7 @@ class RegisterRequest extends FormRequest
             'sex.required' => '性別は必須です',
             'sex.in' => '性別は男性・女性・その他から選択してください',
 
-            'old_year.required' => '生年月日は必須です',
-            'old_month.required' => '生年月日は必須です',
-            'old_day.required' => '生年月日は必須です',
+            'birth_day.required' => '生年月日は必須です',
 
             'old_year.between' => '年は正しい範囲で入力してください',
             'old_month.between' => '月は1〜12で入力してください',
@@ -96,7 +93,6 @@ class RegisterRequest extends FormRequest
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {
-
             $year = $this->old_year;
             $month = $this->old_month;
             $day = $this->old_day;
@@ -108,7 +104,8 @@ class RegisterRequest extends FormRequest
                 is_numeric($day)
             ) {
                 if (!checkdate((int)$month, (int)$day, (int)$year)) {
-                    $validator->errors()->add('old_day', '正しい生年月日を入力してください');
+                    //  ここで birth_day としてエラーをまとめる
+                    $validator->errors()->add('birth_day', '正しい生年月日を入力してください');
                 }
             }
         });
