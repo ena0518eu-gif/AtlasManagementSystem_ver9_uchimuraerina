@@ -77,7 +77,12 @@
             @foreach($category->subCategories as $sub)
             <li>
               <label>
-                <input type="checkbox" name="category_word" value="{{ $sub->id }}" form="postSearchRequest">
+                <!-- ★修正：クリックで単一送信（checkbox → radio） -->
+                <input type="radio"
+                       name="category_word"
+                       value="{{ $sub->id }}"
+                       form="postSearchRequest"
+                       onclick="this.form.submit()">
                 {{ $sub->sub_category }}
               </label>
             </li>

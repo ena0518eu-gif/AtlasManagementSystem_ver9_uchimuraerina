@@ -6,69 +6,86 @@
 
           <div class="d-flex mt-3" style="justify-content:space-between">
             <div style="width:140px">
+
+              @error('over_name')
+                <div class="text-danger">{{ $message }}</div>
+              @enderror
+
               <label class="d-block m-0" style="font-size:13px">姓</label>
               <div class="border-bottom border-primary">
                 <input type="text" class="border-0 w-100" name="over_name" value="{{ old('over_name') }}">
               </div>
-              @error('over_name')
-                <div class="text-danger">{{ $message }}</div>
-              @enderror
             </div>
 
             <div style="width:140px">
+
+              @error('under_name')
+                <div class="text-danger">{{ $message }}</div>
+              @enderror
+
               <label class="d-block m-0" style="font-size:13px">名</label>
               <div class="border-bottom border-primary">
                 <input type="text" class="border-0 w-100" name="under_name" value="{{ old('under_name') }}">
               </div>
-              @error('under_name')
-                <div class="text-danger">{{ $message }}</div>
-              @enderror
             </div>
           </div>
 
           <div class="d-flex mt-3" style="justify-content:space-between">
             <div style="width:140px">
+
+              @error('over_name_kana')
+                <div class="text-danger">{{ $message }}</div>
+              @enderror
+
               <label class="d-block m-0" style="font-size:13px">セイ</label>
               <div class="border-bottom border-primary">
                 <input type="text" class="border-0 w-100" name="over_name_kana" value="{{ old('over_name_kana') }}">
               </div>
-              @error('over_name_kana')
-                <div class="text-danger">{{ $message }}</div>
-              @enderror
             </div>
 
             <div style="width:140px">
+
+              @error('under_name_kana')
+                <div class="text-danger">{{ $message }}</div>
+              @enderror
+
               <label class="d-block m-0" style="font-size:13px">メイ</label>
               <div class="border-bottom border-primary">
                 <input type="text" class="border-0 w-100" name="under_name_kana" value="{{ old('under_name_kana') }}">
               </div>
-              @error('under_name_kana')
-                <div class="text-danger">{{ $message }}</div>
-              @enderror
             </div>
           </div>
 
           <div class="mt-3">
+
+            @error('mail_address')
+              <div class="text-danger">{{ $message }}</div>
+            @enderror
+
             <label class="m-0 d-block" style="font-size:13px">メールアドレス</label>
             <div class="border-bottom border-primary">
               <input type="text" class="w-100 border-0" name="mail_address" value="{{ old('mail_address') }}">
             </div>
-            @error('mail_address')
-              <div class="text-danger">{{ $message }}</div>
-            @enderror
           </div>
         </div>
 
         <div class="mt-3">
-          <input type="radio" name="sex" value="1" {{ old('sex') == 1 ? 'checked' : '' }}> 男性
-          <input type="radio" name="sex" value="2" {{ old('sex') == 2 ? 'checked' : '' }}> 女性
-          <input type="radio" name="sex" value="3" {{ old('sex') == 3 ? 'checked' : '' }}> その他
+
           @error('sex')
             <div class="text-danger">{{ $message }}</div>
           @enderror
+
+          <input type="radio" name="sex" value="1" {{ old('sex') == 1 ? 'checked' : '' }}> 男性
+          <input type="radio" name="sex" value="2" {{ old('sex') == 2 ? 'checked' : '' }}> 女性
+          <input type="radio" name="sex" value="3" {{ old('sex') == 3 ? 'checked' : '' }}> その他
         </div>
 
         <div class="mt-3">
+
+          @error('birth_day')
+            <div class="text-danger">{{ $message }}</div>
+          @enderror
+
           <label style="font-size:13px">生年月日</label><br>
 
           <select name="old_year">
@@ -91,31 +108,31 @@
               <option value="{{ $i }}" {{ old('old_day') == $i ? 'selected' : '' }}>{{ $i }}</option>
             @endfor
           </select>
-
-          @error('birth_day')
-            <div class="text-danger">{{ $message }}</div>
-          @enderror
         </div>
 
         <div class="mt-3">
+
+          @error('role')
+            <div class="text-danger">{{ $message }}</div>
+          @enderror
+
           <label>役職</label><br>
           <input type="radio" name="role" value="1" {{ old('role') == 1 ? 'checked' : '' }}>教師(国語)
           <input type="radio" name="role" value="2" {{ old('role') == 2 ? 'checked' : '' }}>教師(数学)
           <input type="radio" name="role" value="3" {{ old('role') == 3 ? 'checked' : '' }}>教師(英語)
           <input type="radio" name="role" value="4" {{ old('role') == 4 ? 'checked' : '' }}>生徒
-          @error('role')
-            <div class="text-danger">{{ $message }}</div>
-          @enderror
         </div>
 
         <div class="mt-3">
+
+          @error('password')
+            <div class="text-danger">{{ $message }}</div>
+          @enderror
+
           <label>パスワード</label>
           <div class="border-bottom border-primary">
             <input type="password" class="border-0 w-100" name="password">
           </div>
-          @error('password')
-            <div class="text-danger">{{ $message }}</div>
-          @enderror
         </div>
 
         <div class="mt-3">

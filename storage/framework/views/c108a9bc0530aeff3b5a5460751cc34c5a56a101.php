@@ -14,10 +14,7 @@
 
           <div class="d-flex mt-3" style="justify-content:space-between">
             <div style="width:140px">
-              <label class="d-block m-0" style="font-size:13px">姓</label>
-              <div class="border-bottom border-primary">
-                <input type="text" class="border-0 w-100" name="over_name" value="<?php echo e(old('over_name')); ?>">
-              </div>
+
               <?php $__errorArgs = ['over_name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -28,13 +25,15 @@ $message = $__bag->first($__errorArgs[0]); ?>
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+
+              <label class="d-block m-0" style="font-size:13px">姓</label>
+              <div class="border-bottom border-primary">
+                <input type="text" class="border-0 w-100" name="over_name" value="<?php echo e(old('over_name')); ?>">
+              </div>
             </div>
 
             <div style="width:140px">
-              <label class="d-block m-0" style="font-size:13px">名</label>
-              <div class="border-bottom border-primary">
-                <input type="text" class="border-0 w-100" name="under_name" value="<?php echo e(old('under_name')); ?>">
-              </div>
+
               <?php $__errorArgs = ['under_name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -45,15 +44,17 @@ $message = $__bag->first($__errorArgs[0]); ?>
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+
+              <label class="d-block m-0" style="font-size:13px">名</label>
+              <div class="border-bottom border-primary">
+                <input type="text" class="border-0 w-100" name="under_name" value="<?php echo e(old('under_name')); ?>">
+              </div>
             </div>
           </div>
 
           <div class="d-flex mt-3" style="justify-content:space-between">
             <div style="width:140px">
-              <label class="d-block m-0" style="font-size:13px">セイ</label>
-              <div class="border-bottom border-primary">
-                <input type="text" class="border-0 w-100" name="over_name_kana" value="<?php echo e(old('over_name_kana')); ?>">
-              </div>
+
               <?php $__errorArgs = ['over_name_kana'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -64,13 +65,15 @@ $message = $__bag->first($__errorArgs[0]); ?>
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+
+              <label class="d-block m-0" style="font-size:13px">セイ</label>
+              <div class="border-bottom border-primary">
+                <input type="text" class="border-0 w-100" name="over_name_kana" value="<?php echo e(old('over_name_kana')); ?>">
+              </div>
             </div>
 
             <div style="width:140px">
-              <label class="d-block m-0" style="font-size:13px">メイ</label>
-              <div class="border-bottom border-primary">
-                <input type="text" class="border-0 w-100" name="under_name_kana" value="<?php echo e(old('under_name_kana')); ?>">
-              </div>
+
               <?php $__errorArgs = ['under_name_kana'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -81,14 +84,16 @@ $message = $__bag->first($__errorArgs[0]); ?>
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+
+              <label class="d-block m-0" style="font-size:13px">メイ</label>
+              <div class="border-bottom border-primary">
+                <input type="text" class="border-0 w-100" name="under_name_kana" value="<?php echo e(old('under_name_kana')); ?>">
+              </div>
             </div>
           </div>
 
           <div class="mt-3">
-            <label class="m-0 d-block" style="font-size:13px">メールアドレス</label>
-            <div class="border-bottom border-primary">
-              <input type="text" class="w-100 border-0" name="mail_address" value="<?php echo e(old('mail_address')); ?>">
-            </div>
+
             <?php $__errorArgs = ['mail_address'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -99,13 +104,16 @@ $message = $__bag->first($__errorArgs[0]); ?>
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+
+            <label class="m-0 d-block" style="font-size:13px">メールアドレス</label>
+            <div class="border-bottom border-primary">
+              <input type="text" class="w-100 border-0" name="mail_address" value="<?php echo e(old('mail_address')); ?>">
+            </div>
           </div>
         </div>
 
         <div class="mt-3">
-          <input type="radio" name="sex" value="1" <?php echo e(old('sex') == 1 ? 'checked' : ''); ?>> 男性
-          <input type="radio" name="sex" value="2" <?php echo e(old('sex') == 2 ? 'checked' : ''); ?>> 女性
-          <input type="radio" name="sex" value="3" <?php echo e(old('sex') == 3 ? 'checked' : ''); ?>> その他
+
           <?php $__errorArgs = ['sex'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -116,9 +124,25 @@ $message = $__bag->first($__errorArgs[0]); ?>
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+
+          <input type="radio" name="sex" value="1" <?php echo e(old('sex') == 1 ? 'checked' : ''); ?>> 男性
+          <input type="radio" name="sex" value="2" <?php echo e(old('sex') == 2 ? 'checked' : ''); ?>> 女性
+          <input type="radio" name="sex" value="3" <?php echo e(old('sex') == 3 ? 'checked' : ''); ?>> その他
         </div>
 
         <div class="mt-3">
+
+          <?php $__errorArgs = ['birth_day'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+            <div class="text-danger"><?php echo e($message); ?></div>
+          <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+
           <label style="font-size:13px">生年月日</label><br>
 
           <select name="old_year">
@@ -141,25 +165,10 @@ unset($__errorArgs, $__bag); ?>
               <option value="<?php echo e($i); ?>" <?php echo e(old('old_day') == $i ? 'selected' : ''); ?>><?php echo e($i); ?></option>
             <?php endfor; ?>
           </select>
-
-          <?php $__errorArgs = ['birth_day'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-            <div class="text-danger"><?php echo e($message); ?></div>
-          <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
         </div>
 
         <div class="mt-3">
-          <label>役職</label><br>
-          <input type="radio" name="role" value="1" <?php echo e(old('role') == 1 ? 'checked' : ''); ?>>教師(国語)
-          <input type="radio" name="role" value="2" <?php echo e(old('role') == 2 ? 'checked' : ''); ?>>教師(数学)
-          <input type="radio" name="role" value="3" <?php echo e(old('role') == 3 ? 'checked' : ''); ?>>教師(英語)
-          <input type="radio" name="role" value="4" <?php echo e(old('role') == 4 ? 'checked' : ''); ?>>生徒
+
           <?php $__errorArgs = ['role'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -170,13 +179,16 @@ $message = $__bag->first($__errorArgs[0]); ?>
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+
+          <label>役職</label><br>
+          <input type="radio" name="role" value="1" <?php echo e(old('role') == 1 ? 'checked' : ''); ?>>教師(国語)
+          <input type="radio" name="role" value="2" <?php echo e(old('role') == 2 ? 'checked' : ''); ?>>教師(数学)
+          <input type="radio" name="role" value="3" <?php echo e(old('role') == 3 ? 'checked' : ''); ?>>教師(英語)
+          <input type="radio" name="role" value="4" <?php echo e(old('role') == 4 ? 'checked' : ''); ?>>生徒
         </div>
 
         <div class="mt-3">
-          <label>パスワード</label>
-          <div class="border-bottom border-primary">
-            <input type="password" class="border-0 w-100" name="password">
-          </div>
+
           <?php $__errorArgs = ['password'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -187,6 +199,11 @@ $message = $__bag->first($__errorArgs[0]); ?>
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+
+          <label>パスワード</label>
+          <div class="border-bottom border-primary">
+            <input type="password" class="border-0 w-100" name="password">
+          </div>
         </div>
 
         <div class="mt-3">

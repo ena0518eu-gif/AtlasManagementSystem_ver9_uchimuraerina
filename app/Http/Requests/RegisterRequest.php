@@ -6,21 +6,11 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class RegisterRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
-     */
     public function rules()
     {
         return [
@@ -34,7 +24,8 @@ class RegisterRequest extends FormRequest
 
             'sex' => ['required', 'in:1,2,3'],
 
-            'old_year' => ['required', 'integer', 'between:1985,' . date('Y')],
+            // ★ 2000年1月1日〜本日まで対応
+            'old_year' => ['required', 'integer', 'between:2000,' . date('Y')],
             'old_month' => ['required', 'integer', 'between:1,12'],
             'old_day' => ['required', 'integer', 'between:1,31'],
 
@@ -44,11 +35,6 @@ class RegisterRequest extends FormRequest
         ];
     }
 
-    /**
-     * Get the validation error messages.
-     *
-     * @return array<string, string>
-     */
     public function messages()
     {
         return [
@@ -73,7 +59,7 @@ class RegisterRequest extends FormRequest
 
             'birth_day.required' => '生年月日は必須です',
 
-            'old_year.between' => '年は正しい範囲で入力してください',
+            'old_year.between' => '年は2000年〜本日までで入力してください',
             'old_month.between' => '月は1〜12で入力してください',
             'old_day.between' => '日は1〜31で入力してください',
 
@@ -97,15 +83,21 @@ class RegisterRequest extends FormRequest
             $month = $this->old_month;
             $day = $this->old_day;
 
-            // ★ ここが重要（TypeError防止）
-            if (
-                is_numeric($year) &&
-                is_numeric($month) &&
-                is_numeric($day)
-            ) {
+            if (is_numeric($year) && is_numeric($month) && is_numeric($day)) {
+
+                // 存在しない日付チェック（2月31日など）
                 if (!checkdate((int)$month, (int)$day, (int)$year)) {
-                    //  ここで birth_day としてエラーをまとめる
                     $validator->errors()->add('birth_day', '正しい生年月日を入力してください');
+                    return;
+                }
+
+                $birth = \Carbon\Carbon::createFromDate($year, $month, $day);
+                $min = \Carbon\Carbon::createFromDate(2000, 1, 1);
+                $max = now();
+
+                // 範囲チェック（2000/1/1〜今日）
+                if ($birth->lt($min) || $birth->gt($max)) {
+                    $validator->errors()->add('birth_day', '生年月日は2000年1月1日〜本日までで入力してください');
                 }
             }
         });

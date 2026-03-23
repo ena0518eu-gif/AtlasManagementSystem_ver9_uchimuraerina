@@ -25,12 +25,32 @@ class PostsController extends Controller
         $like = new Like;
         $post_comment = new Post;
         if(!empty($request->keyword)){
-            $posts = Post::with('user', 'postComments')
-            ->where('post_title', 'like', '%'.$request->keyword.'%')
-            ->orWhere('post', 'like', '%'.$request->keyword.'%')->get();
+
+            // ★追加：サブカテゴリー完全一致チェック
+            $subCategory = SubCategory::where('sub_category', $request->keyword)->first();
+
+            if($subCategory){
+                // 追加：完全一致した場合はサブカテゴリーで絞る
+                $posts = Post::with('user', 'postComments')
+                ->whereHas('subCategories', function($query) use ($subCategory){
+                    $query->where('sub_category_id', $subCategory->id);
+                })->get();
+            }else{
+                // 既存：キーワード検索
+                $posts = Post::with('user', 'postComments')
+                ->where('post_title', 'like', '%'.$request->keyword.'%')
+                ->orWhere('post', 'like', '%'.$request->keyword.'%')->get();
+            }
+
         }else if($request->category_word){
             $sub_category = $request->category_word;
-            $posts = Post::with('user', 'postComments')->get();
+
+            // 修正：サブカテゴリークリック時の絞り込み
+            $posts = Post::with('user', 'postComments')
+            ->whereHas('subCategories', function($query) use ($sub_category){
+                $query->where('sub_category_id', $sub_category);
+            })->get();
+
         }else if($request->like_posts){
             $likes = Auth::user()->likePostId()->get('like_post_id');
             $posts = Post::with('user', 'postComments')
@@ -59,6 +79,20 @@ class PostsController extends Controller
             'post_title' => $request->post_title,
             'post' => $request->post_body
         ]);
+
+        // ★追加：サブカテゴリー新規登録処理
+        if($request->sub_category_name){
+            $newSubCategory = SubCategory::create([
+                'main_category_id' => $request->main_category_id,
+                'sub_category' => $request->sub_category_name,
+            ]);
+
+            // 新規作成したサブカテゴリーを投稿に紐づけ
+            PostSubCategory::create([
+                'post_id' => $post->id,
+                'sub_category_id' => $newSubCategory->id,
+            ]);
+        }
 
         // 選択されたサブカテゴリーを中間テーブルに登録
         if($request->post_category_id){

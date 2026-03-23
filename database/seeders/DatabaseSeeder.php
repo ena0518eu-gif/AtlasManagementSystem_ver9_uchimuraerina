@@ -4,8 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use User;
-
+// use User;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -19,5 +18,7 @@ class DatabaseSeeder extends Seeder
         // UsersTableSeeder を呼び出す(追記)
         $this->call(UsersTableSeeder::class);
 
-        }
+        // SubjectsTableSeeder を追加
+        $this->call(SubjectsTableSeeder::class);
+    }
 }
