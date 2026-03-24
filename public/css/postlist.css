@@ -86,7 +86,8 @@
 /* 検索エリア */
 .search_area {
   display: flex;
-  gap: 5px;
+  gap: 0;
+  /* ← 5px から 0 に変更 */
   margin-top: 5px;
 }
 
@@ -96,8 +97,8 @@
   padding: 5px 8px;
   font-size: 12px;
   border: 1px solid #ddd;
-  border-radius: 6px;
-  /* ←もっと弱く */
+  border-radius: 6px 0 0 6px;
+  /* ← 右側の角を0に変更してボタンとくっつける */
   outline: none;
   background: #fff;
 }
@@ -109,11 +110,12 @@
 
 /* 検索ボタン */
 .search_area input[type="submit"] {
-  background: #007fa3;
+  background: #00a8cc;
   color: #fff;
   border: none;
   padding: 5px 10px;
-  border-radius: 3px;
+  border-radius: 0 3px 3px 0;
+  /* ← 左側の角を0に変更してinputとくっつける */
   font-size: 12px;
 }
 
