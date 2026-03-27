@@ -10,15 +10,22 @@
 
   <link rel="stylesheet" href="<?php echo e(asset('css/calendar.css')); ?>">
 
-  <div class="w-75 m-auto">
+  
+  <div class="calendar_area">
     <div class="w-100">
-      <p><?php echo e($calendar->getTitle()); ?></p>
+      <p class="calendar-title"><?php echo e($calendar->getTitle()); ?></p>
 
       <!-- カレンダー表示 -->
       <?php echo $calendar->render(); ?>
 
 
     </div>
+      <!-- 登録ボタン：カレンダー幅に合わせて右寄せ -->
+  <div style="text-align:right; margin-top:20px;">
+    <button type="submit" form="reserveSetting" class="btn btn-primary"
+      onclick="return confirm('予約枠を登録してよろしいですか？')">登録</button>
+  </div>
+
   </div>
 
  <?php echo $__env->renderComponent(); ?>

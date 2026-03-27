@@ -8,20 +8,18 @@
     <!-- ★ w-75削除して外枠を広げる -->
     <div class="calendar_area">
       <div class="w-100">
-        <p>{{ $calendar->getTitle() }}</p>
+        <p class="calendar-title">{{ $calendar->getTitle() }}</p>
 
         <!-- カレンダー表示 -->
         {!! $calendar->render() !!}
 
       </div>
-    <!-- ★ 送信ボタン追加 -->
-    <div style="text-align:center; margin-top:20px;">
+    <!-- ★ 送信ボタン右寄せ -->
+    <div style="text-align:right; margin-top:20px;">
       <button type="submit" class="btn btn-primary">予約する</button>
     </div>
 
-
     </div>
-
 
   </form>
 

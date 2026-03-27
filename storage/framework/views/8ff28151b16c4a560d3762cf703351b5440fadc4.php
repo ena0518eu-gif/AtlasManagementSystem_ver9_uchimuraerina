@@ -13,7 +13,7 @@
   
   <div class="calendar_area">
     <div class="w-100">
-      <p><?php echo e($calendar->getTitle()); ?></p>
+      <p class="calendar-title"><?php echo e($calendar->getTitle()); ?></p>
 
       <!-- カレンダー表示 -->
       <?php echo $calendar->render(); ?>
@@ -27,7 +27,6 @@
   </div>
 
   </div>
-
 
  <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>

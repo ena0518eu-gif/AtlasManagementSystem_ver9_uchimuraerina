@@ -5,7 +5,7 @@
   {{-- w-75 m-auto を削除 → calendar_area クラスで幅管理 --}}
   <div class="calendar_area">
     <div class="w-100">
-      <p>{{ $calendar->getTitle() }}</p>
+      <p class="calendar-title">{{ $calendar->getTitle() }}</p>
 
       <!-- カレンダー表示 -->
       {!! $calendar->render() !!}
@@ -18,6 +18,5 @@
   </div>
 
   </div>
-
 
 </x-sidebar>

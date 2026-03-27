@@ -217,3 +217,10 @@ select.form-control-sm {
 .table-striped tbody td {
   text-align: center;
 }
+
+/* カレンダータイトル中央寄せ */
+.calendar-title {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
