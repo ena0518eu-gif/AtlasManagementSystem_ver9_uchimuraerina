@@ -21,10 +21,15 @@ class PostFormRequest extends FormRequest
 
             'post_title' => 'required|string|max:100',
             'post_body' => 'required|string|max:2000',
+
+            // ★追加：コメント用バリデーション
+            // コメントは必須、文字列型、最大250文字
+            'comment' => 'required|string|max:250',
         ];
     }
 
-    public function messages(){
+    public function messages()
+    {
         return [
             'post_category_id.required' => 'カテゴリーは必ず選択してください。',
             'post_category_id.exists' => '正しいサブカテゴリーを選択してください。',
@@ -41,6 +46,11 @@ class PostFormRequest extends FormRequest
             'post_body.required' => '投稿内容は必ず入力してください。',
             'post_body.string' => '内容は文字列である必要があります。',
             'post_body.max' => '最大文字数は2000文字です。',
+
+            // 追加：コメント用メッセージ
+            'comment.required' => 'コメントは必須です。',
+            'comment.string' => 'コメントは文字列で入力してください。',
+            'comment.max' => 'コメントは250文字以内で入力してください。',
         ];
     }
 }

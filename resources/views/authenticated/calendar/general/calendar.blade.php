@@ -14,12 +14,14 @@
         {!! $calendar->render() !!}
 
       </div>
-    </div>
-
     <!-- ★ 送信ボタン追加 -->
     <div style="text-align:center; margin-top:20px;">
       <button type="submit" class="btn btn-primary">予約する</button>
     </div>
+
+
+    </div>
+
 
   </form>
 

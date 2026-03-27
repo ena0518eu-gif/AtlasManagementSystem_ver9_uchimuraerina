@@ -65,6 +65,12 @@
       <div>
         <?php if($user->role == 4): ?>
         <span>選択科目 :</span>
+
+        <!-- 選択科目を表示 -->
+        <?php $__currentLoopData = $user->subjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subject): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+          <span class="value-bold"><?php echo e($subject->subject); ?></span>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
         <?php endif; ?>
       </div>
 

@@ -40,7 +40,7 @@ class CalendarView{
         $startDay = $this->carbon->copy()->format("Y-m-01");
         $toDay = $this->carbon->copy()->format("Y-m-d");
 
-        if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
+        if($startDay <= $day->everyDay() && $toDay > $day->everyDay()){
           // 過去日 → past-day + 曜日クラス両方付与
           $html[] = '<td class="calendar-td past-day '.$day->getClassName().'">';
         }else{
@@ -64,7 +64,7 @@ class CalendarView{
             $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">' . $reservePartLabel . '参加</p>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }else{
-            // 🔥 キャンセルボタン → モーダル起動
+            //  キャンセルボタン → モーダル起動
             $html[] = '<button type="button" class="btn btn-danger p-0 w-75 btn-cancel-reserve" style="font-size:12px"
               data-date="'. $reserveDate .'"
               data-part="'. $reservePartLabel .'"
@@ -83,7 +83,7 @@ class CalendarView{
     $html[] = '</table>';
     $html[] = '</div>';
 
-    // ❌ form削除（ここが今回の本丸）
+    //  form削除（ここが今回の本丸）
     // $html[] = '<form action="/reserve/calendar" method="post" id="reserveParts">'.csrf_field().'</form>';
     // $html[] = '<form action="/delete/calendar" method="post" id="deleteParts">'.csrf_field().'</form>';
 

@@ -28,6 +28,9 @@ class UsersController extends Controller
         $userFactory = new SearchResultFactories();
         $users = $userFactory->initializeUsers($keyword, $category, $updown, $gender, $role, $subjects);
 
+        // ▼ 追加：選択科目を取得
+        $users = $users->load('subjects');
+
         // 科目リストを取得して検索ドロップダウンに表示
         $subjects = Subjects::all();
 
@@ -35,6 +38,7 @@ class UsersController extends Controller
     }
 
     /**
+
      * ユーザープロフィール画面
      */
     public function userProfile($id){

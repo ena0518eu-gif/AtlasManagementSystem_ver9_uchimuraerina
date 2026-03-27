@@ -173,14 +173,8 @@ class PostsController extends Controller
         return redirect()->route('post.input');
     }
 
-    public function commentCreate(Request $request){
-        // コメントのバリデーション
-        $request->validate([
-            'comment' => 'required',
-        ], [
-            'comment.required' => 'コメントは必ず入力してください。',
-        ]);
-
+    public function commentCreate(PostFormRequest $request){ // Request → PostFormRequest に変更
+        // コメントのバリデーションは PostFormRequest で適用済み
         PostComment::create([
             'post_id' => $request->post_id,
             'user_id' => Auth::id(),
