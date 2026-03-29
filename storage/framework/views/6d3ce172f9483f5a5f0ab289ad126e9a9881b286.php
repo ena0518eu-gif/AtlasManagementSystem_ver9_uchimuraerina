@@ -116,13 +116,37 @@
 </div>
 
 
-<?php if($errors->has('post_title') || $errors->has('post_body')): ?>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    document.querySelector('.modal').style.display = 'block';
+    const editModalButton = document.querySelector('.edit-modal-open');
+    const modal = document.querySelector('.modal');
+    const closeModalButton = document.querySelector('.js-modal-close');
+
+    // 編集ボタンがクリックされたらモーダルを表示
+    if (editModalButton) {
+      editModalButton.addEventListener('click', function() {
+        modal.style.display = 'block';  // モーダルを表示
+        document.querySelector('input[name="post_title"]').value = editModalButton.getAttribute('post_title');
+        document.querySelector('textarea[name="post_body"]').value = editModalButton.getAttribute('post_body');
+        document.querySelector('input[name="post_id"]').value = editModalButton.getAttribute('post_id');
+      });
+    }
+
+    // モーダルの閉じるボタン
+    if (closeModalButton) {
+      closeModalButton.addEventListener('click', function() {
+        modal.style.display = 'none';  // モーダルを非表示
+      });
+    }
   });
 </script>
-<?php endif; ?>
+
+
+
+<script>
+  // コメントアウトしたバリデーションエラー時の自動モーダル表示を削除しました。
+</script>
+
 
  <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>

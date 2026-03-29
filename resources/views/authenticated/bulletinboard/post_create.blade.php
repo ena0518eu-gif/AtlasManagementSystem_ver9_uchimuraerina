@@ -67,6 +67,7 @@
             >{{ old('post_body') }}</textarea>
         </div>
 
+        <!-- 投稿フォーム -->
         <div class="mt-3 text-right">
             <input
                 type="submit"
@@ -83,6 +84,35 @@
         >
             {{ csrf_field() }}
         </form>
+
+    </div>
+
+    <!-- コメント追加フォーム（別フォームにする） -->
+    <div class="category_area w-25 m-5 p-5">
+
+        <div class="">
+            <p class="m-0">コメント</p>
+
+            <!-- バリデーションメッセージ -->
+            @if($errors->first('comment'))
+                <span class="error_message">
+                    {{ $errors->first('comment') }}
+                </span>
+            @endif
+
+            <!-- コメントフォームの開始 -->
+            <form action="{{ route('comment.create') }}" method="post">
+                {{ csrf_field() }}
+
+                <textarea class="w-100" name="comment">{{ old('comment') }}</textarea>
+
+                <div class="mt-3 text-right">
+                    <input type="submit" value="コメント追加" class="btn btn-secondary">
+                </div>
+            </form>
+            <!-- コメントフォームの終了 -->
+
+        </div>
 
     </div>
 

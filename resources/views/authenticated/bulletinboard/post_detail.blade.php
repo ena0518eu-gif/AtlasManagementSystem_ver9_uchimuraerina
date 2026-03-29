@@ -13,7 +13,7 @@
           <div>
             {{-- 編集・削除ボタンは自分の投稿にのみ表示 --}}
             @if(Auth::id() === $post->user_id)
-            {{--編集は青ボタン、削除は赤ボタン --}}
+            {{-- 編集は青ボタン、削除は赤ボタン --}}
             <button class="btn btn-primary btn-sm edit-modal-open mr-2"
               post_title="{{ $post->post_title }}"
               post_body="{{ $post->post }}"
@@ -106,13 +106,37 @@
   </div>
 </div>
 
-{{-- バリデーションエラー時にモーダルを自動で開く --}}
-@if($errors->has('post_title') || $errors->has('post_body'))
+{{-- 編集ボタンをクリックしたときにモーダルを開く --}}
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    document.querySelector('.modal').style.display = 'block';
+    const editModalButton = document.querySelector('.edit-modal-open');
+    const modal = document.querySelector('.modal');
+    const closeModalButton = document.querySelector('.js-modal-close');
+
+    // 編集ボタンがクリックされたらモーダルを表示
+    if (editModalButton) {
+      editModalButton.addEventListener('click', function() {
+        modal.style.display = 'block';  // モーダルを表示
+        document.querySelector('input[name="post_title"]').value = editModalButton.getAttribute('post_title');
+        document.querySelector('textarea[name="post_body"]').value = editModalButton.getAttribute('post_body');
+        document.querySelector('input[name="post_id"]').value = editModalButton.getAttribute('post_id');
+      });
+    }
+
+    // モーダルの閉じるボタン
+    if (closeModalButton) {
+      closeModalButton.addEventListener('click', function() {
+        modal.style.display = 'none';  // モーダルを非表示
+      });
+    }
   });
 </script>
-@endif
+
+{{-- バリデーションエラー時にモーダルを自動で開かない --}}
+{{-- @if($errors->has('post_title') || $errors->has('post_body')) --}}
+<script>
+  // コメントアウトしたバリデーションエラー時の自動モーダル表示を削除しました。
+</script>
+{{-- @endif --}}
 
 </x-sidebar>

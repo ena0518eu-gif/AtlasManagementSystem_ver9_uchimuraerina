@@ -1,28 +1,23 @@
 jQuery(function ($) {
-
   console.log("user_search.js 読み込み成功");
 
   // ===============================
   // 検索条件アコーディオン
   // ===============================
   $('.search_conditions_toggle').on('click', function () {
-
     console.log("検索条件クリック");
 
     const inner = $('.search_conditions_inner');
     const arrow = $(this).find('.arrow');
 
     inner.slideToggle(300);
-
     arrow.toggleClass('open');
-
   });
 
   // ===============================
   // リセットボタン
   // ===============================
   $('#resetBtn').on('click', function () {
-
     console.log("リセットボタン押された");
 
     // テキスト入力をクリア
@@ -41,7 +36,22 @@ jQuery(function ($) {
 
     // ← リセット後に全件検索を実行
     $('#userSearchRequest').submit();
-
   });
 
+  // ===============================
+  // コメント投稿処理
+  // ===============================
+  $('#commentRequest').on('submit', function (e) {
+    e.preventDefault();  // フォーム送信を一時的に停止
+
+    const comment = $('textarea[name="comment"]').val();
+    console.log('送信されたコメント:', comment);
+
+    // コメントが入力されているかチェック
+    if (comment.trim() !== '') {
+      this.submit();  // 実際にフォームを送信
+    } else {
+      console.log("コメントが空です！");
+    }
+  });
 });
