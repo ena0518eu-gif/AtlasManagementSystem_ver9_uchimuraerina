@@ -14,4 +14,16 @@ $(function () {
     // モーダルを表示
     $('#cancelModal').modal('show');
   });
+
+  // 今日以降の未来日クリック時にキャンセルボタンに変換
+  $(document).on('click', '.part-counts a', function (e) {
+    var partDate = $(this).data('date'); // YYYY-MM-DD
+    var today = new Date().toISOString().split('T')[0];
+
+    if (partDate >= today) {
+      e.preventDefault(); // 通常リンク無効化
+      $(this).addClass('btn-cancel-reserve'); // キャンセルクラス付与
+      $(this).click(); // モーダル表示
+    }
+  });
 });

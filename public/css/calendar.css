@@ -4,16 +4,20 @@
 /* カレンダー外枠 */
 .calendar_area {
   width: 100%;
-  max-width: 1400px;
-  /* ← 最大幅だけ制限 */
-  margin: 40px auto;
+  max-width: 900px;
+  /* 画面に収まるサイズに調整 */
+  margin: 20px auto;
+  /* 上下余白を少し減らす */
   background: #fff;
   border-radius: 6px;
-  padding: 5px;
-  /* ← 10px → 5px（余白削減） */
+  /* 角を丸くする */
+  padding: 15px;
+  /* 白枠内余白を十分に確保 */
   border: 1px solid #ddd;
   box-sizing: border-box;
   /* ← 追加：はみ出し防止 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  /* 影を追加 */
 }
 
 /* ===============================
@@ -21,43 +25,38 @@
 ================================ */
 .calendar {
   width: 100%;
-  /* ← 追加：親いっぱいに広げる */
-  margin: 0;
-  /* ← 追加：中央寄せ解除 */
+  margin: 0 auto;
+  font-size: 12px;
+  /* 文字サイズを統一 */
 }
 
 .calendar table {
   width: 100%;
-  margin: 0;
-  /* ← 追加：余白削除（重要） */
   border-collapse: collapse;
   table-layout: fixed;
-  /* ← 列幅均等化 */
+  /* 列幅均等化 */
 }
 
 /* 曜日ヘッダー */
 .calendar th {
   border: 1px solid #ddd;
-  padding: 8px;
-  /* ← 少し詰める */
+  padding: 6px 0;
   background-color: #f5f5f5;
   font-weight: bold;
-  font-size: 13px;
+  font-size: 12px;
   text-align: center;
   width: calc(100% / 7);
-  /* ← 横幅均等 */
 }
 
 /* 日付マス */
 .calendar td {
   border: 1px solid #ddd;
-  height: 130px;
+  height: 90px;
+  /* 高さを統一 */
   vertical-align: top;
-  padding: 2px;
-  /* ← 余白削減（重要） */
-  position: relative;
+  padding: 4px 5px;
+  /* 白枠との余白確保 */
   width: calc(100% / 7);
-  /* ← 横幅均等 */
 }
 
 /* 空白セルの余白削除 */
@@ -69,18 +68,14 @@
   display: none;
 }
 
-/* ===============================
-   日付
-================================ */
+/* 日付 */
 .day {
-  font-size: 13px;
+  font-size: 12px;
   text-align: center;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
-/* ===============================
-   内容エリア（select・ボタン）
-================================ */
+/* 内容エリア（select・ボタン） */
 .calendar td select,
 .calendar td .btn-cancel-reserve,
 .calendar td p {
@@ -89,9 +84,7 @@
   margin-top: 4px;
 }
 
-/* ===============================
-   ▼ ボタンUI
-================================ */
+/* ボタンUI */
 .calendar td button {
   font-size: 11px;
   padding: 4px 0;
@@ -105,9 +98,7 @@
   opacity: 0.85;
 }
 
-/* ===============================
-   select
-================================ */
+/* select */
 .calendar td select {
   font-size: 11px;
   width: 90%;
@@ -126,10 +117,10 @@ select.form-control-sm {
   color: red;
 }
 
-/* 受付終了 */
+/* 受付終了（黒文字に変更） */
 .text-muted {
   font-size: 11px;
-  color: #999;
+  color: #000;
 }
 
 /* 過去日 */
@@ -157,97 +148,16 @@ select.form-control-sm {
   color: red;
 }
 
-/* 閉じるボタン */
-#cancelModal .btn-primary {
-  padding: 6px 16px;
-  font-size: 13px;
-}
-
-/* キャンセルボタン */
-#cancelModal .btn-danger {
-  padding: 6px 24px;
-  font-size: 13px;
-}
-
-/* admin */
-/* 部数リンクを水色に */
-.text-left a {
-  color: #03AAD2 !important;
-  text-decoration: none;
-}
-
-/* 土日の枠数（数字）は黒 */
-.day-sat .text-left,
-.day-sun .text-left {
-  color: #333 !important;
-}
-
-/* 土日の部数リンクも水色のまま */
-.day-sat .text-left a,
-.day-sun .text-left a {
-  color: #03AAD2 !important;
-}
-
-/* ===============================
-   admin 部数エリア
-================================ */
-
-/* 部数エリアの左右余白 */
-.part-counts {
-  padding: 10% 15% 10% 15%;
-  /* ← さらに詰める（重要） */
-  /* ← 30% → 20% → 15% に縮小 */
-}
-
-/* 部数と枠数の間隔 */
-.part-counts p {
-  display: flex !important;
-  justify-content: flex-start;
-  font-size: 11px;
-  margin: 0;
-  gap: 15px;
-  /* ← 40px → 20px → 15px */
-}
-
-/* 部数リンク */
-.part-counts a {
-  color: #03AAD2;
-  text-decoration: none;
-}
-
-/* 枠数（数字）は黒 */
-.part-counts span {
-  color: #333;
-}
-
-/* ===============================
-   予約詳細テーブル
-================================ */
-
-/* ヘッダー水色 */
-.thead-custom th {
-  background-color: #03AAD2;
-  color: #fff;
-  text-align: center;
-}
-
-/* 1行ごとに交互背景 */
-.table-striped tbody tr:nth-child(odd) {
-  background-color: #ffffff;
-}
-
-.table-striped tbody tr:nth-child(even) {
-  background-color: #E8F7FB;
-}
-
-/* セル中央揃え */
-.table-striped tbody td {
-  text-align: center;
-}
-
 /* カレンダータイトル中央寄せ */
 .calendar-title {
   text-align: center;
-  font-size: 18px;
-  margin-bottom: 20px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* 登録ボタン調整（枠内に入るように） */
+button.btn-primary {
+  padding: 6px 14px;
+  font-size: 13px;
+  margin-top: 10px;
 }

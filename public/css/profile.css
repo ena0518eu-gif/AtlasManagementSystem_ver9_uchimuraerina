@@ -6,9 +6,10 @@
 .subject_toggle {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   cursor: pointer;
-  color: #007bff;
+  color: #4FC3F7;
+  /* ← 少し薄い水色に修正 */
   margin-top: 10px;
   font-size: 14px;
 }
@@ -18,10 +19,22 @@
   text-decoration: underline;
 }
 
-/* 矢印 */
+/* ▼細い矢印をCSSで作る */
 .arrow {
-  font-size: 12px;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid #4FC3F7;
+  border-bottom: 1.5px solid #4FC3F7;
+  transform: rotate(45deg);
+  /* ▼ */
   transition: 0.2s;
+  margin-top: 2px;
+}
+
+/* ▲（開いたとき） */
+.subject_toggle.open .arrow {
+  transform: rotate(-135deg);
 }
 
 /* =========================
@@ -36,10 +49,10 @@
   transition: max-height 0.3s ease;
 }
 
-/* ★ 開いた状態（高さを大きくして切れ防止） */
+/* ★ 開いた状態 */
 .subject_inner.open {
-  max-height: 1000px;
-  /* ← 修正：余裕を持たせる */
+  max-height: 500px;
+  /* ← ここ重要（大きすぎるとバグる） */
   margin-top: 10px;
 }
 
@@ -63,16 +76,16 @@
   transform: scale(1.1);
 }
 
-/* ボタン余白 */
-.subject_inner .btn {
-  margin-top: 10px;
-}
-
-/* 横並び（登録用） */
+/* 登録ボタン横並び用 */
 .subject_row {
   display: flex;
-  gap: 15px;
+  /* 横並び */
+  gap: 10px;
+  /* ボタンとチェックボックス間 */
   flex-wrap: wrap;
+  /* 狭い場合は改行 */
+  align-items: center;
+  /* 縦方向中央揃え */
   margin-top: 5px;
 }
 
@@ -83,10 +96,15 @@
   gap: 5px;
 }
 
+/* ボタン余白をリセット */
+.subject_row input[type="submit"] {
+  margin-top: 0;
+}
+
 /* タイトルを左上固定
 .profile_title {
   margin-left: 0px;
-  /* ← sidebarとの余白に合わせる */
+*/
 /* margin-top: 0px;
   font-size: 18px;
 } */
@@ -107,10 +125,32 @@
 .profile_title {
   margin-left: 0 !important;
   padding-left: 10px;
-  /* 微調整 */
+  font-size: 18px;
 }
 
 /* main-containerの余白を消す（最優先） */
 .main-container {
   padding: 0 !important;
+}
+
+/* サイドバー寄せ */
+.top_area {
+  padding-top: 40px;
+  margin-left: 0 !important;
+  width: 75%;
+}
+
+/* ユーザー情報欄に影を付ける */
+.user_status {
+  border-radius: 10px;
+  background-color: #FFF;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  margin-top: 20px;
+}
+
+/* 左寄せ専用クラス */
+.profile-left {
+  margin-left: 0 !important;
+  margin-right: auto !important;
 }

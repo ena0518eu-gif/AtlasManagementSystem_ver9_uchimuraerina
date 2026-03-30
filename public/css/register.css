@@ -1,0 +1,153 @@
+/* 背景色はログイン画面と同じ淡い青 */
+.register-wrapper {
+  background-color: #dce8f0;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 白いカードの枠 */
+.register-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  padding: 16px 24px 18px 24px;
+  /* ← 少し詰める */
+  width: 380px;
+  /* ← 見本に合わせて小さく */
+}
+
+/* 入力欄は枠は残しつつ、青の下線もつける */
+.register_form input[type="text"],
+.register_form input[type="password"] {
+  border: none;
+  border-bottom: 2px solid #007bff;
+  /* 青い下線 */
+  border-radius: 0;
+  padding: 6px 8px;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+}
+
+/* フォーカス */
+.register_form input[type="text"]:focus,
+.register_form input[type="password"]:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px #007bff66;
+}
+
+/* バリデーションメッセージの赤文字はそのまま */
+.text-danger {
+  color: #dc3545;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+/* 姓・名、セイ・メイの間隔を狭く */
+.register_form .d-flex {
+  justify-content: space-between;
+}
+
+.register_form .d-flex>div {
+  width: 48%;
+  /* ← 横幅広げて隙間減らす */
+  margin-right: 0;
+  /* ← 余計な右余白削除 */
+}
+
+/* 性別*/
+.sex-radio {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+  margin-top: 10px;
+  font-size: 12px;
+  margin-left: 30px;
+}
+
+/* 役職ラジオ（縦並び） */
+.role-radio {
+  display: block;
+  /* ← 縦にする */
+  margin-top: 10px;
+}
+
+/* 役職ラベル */
+.role-radio .role-label {
+  width: 100%;
+  font-size: 13px;
+  text-align: left;
+  font-weight: 500;
+  margin-bottom: 5px;
+  /* ← 下に余白 */
+}
+
+/* 役職ラジオボタン */
+.role-radio .role-options {
+  display: flex;
+  gap: 6px;
+  /* ← 間隔を縮める */
+  flex-wrap: nowrap;
+  /* ← 1列固定 */
+  font-size: 12px;
+  /* ← 文字を少し小さく */
+}
+
+/* ラジオと文字の間も詰める */
+.role-radio .role-options input {
+  margin-right: 2px;
+}
+
+/* 生年月日 → ラベル下にフォーム配置 */
+.birthday-select {
+  margin-top: 10px;
+  display: block;
+  /* ← 横並びやめて縦 */
+}
+
+/* 生年月日ラベル */
+.birthday-select label {
+  font-size: 13px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* 入力部分 */
+.birthday-inputs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 年 月 日 の文字 */
+.birthday-inputs span {
+  font-size: 13px;
+}
+
+.birthday-inputs select {
+  border: none;
+  border-bottom: 2px solid #007bff;
+  /* 青い下線 */
+  border-radius: 0;
+  padding: 4px 6px;
+  outline: none;
+  background: transparent;
+  width: 70px;
+}
+
+.birthday-inputs select:focus {
+  border-bottom: 2px solid #0056b3;
+}
+
+/* 全体のマージンをコンパクトに */
+.mt-3 {
+  margin-top: 8px !important;
+}
+
+.mt-5 {
+  margin-top: 16px !important;
+}

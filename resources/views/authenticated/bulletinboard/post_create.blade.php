@@ -88,23 +88,22 @@
     </div>
 
     <!-- コメント追加フォーム（別フォームにする） -->
+    <!--
+    ❌ 課題：コメント投稿欄を削除
     <div class="category_area w-25 m-5 p-5">
 
         <div class="">
             <p class="m-0">コメント</p>
 
-            <!-- バリデーションメッセージ -->
             @if($errors->first('comment'))
                 <span class="error_message">
                     {{ $errors->first('comment') }}
                 </span>
             @endif
 
-            <!-- コメントフォームの開始 -->
             <form action="{{ route('comment.create') }}" method="post">
                 {{ csrf_field() }}
 
-                <!-- ★追加：post_id -->
                 <input type="hidden" name="post_id" value="{{ old('post_id') }}">
 
                 <textarea class="w-100" name="comment">{{ old('comment') }}</textarea>
@@ -113,16 +112,17 @@
                     <input type="submit" value="コメント追加" class="btn btn-secondary">
                 </div>
             </form>
-            <!-- コメントフォームの終了 -->
 
         </div>
 
     </div>
+    -->
 
     <!-- 管理者のみ表示 -->
     <!-- @can('admin') -->
 
-    <div class="category_area w-25 m-5 p-5">
+    <!-- ⭐ 余白削除：m-5 p-5 → m-5 p-3 に変更 -->
+    <div class="category_area w-25 m-5 p-3">
 
         <div class="">
             <p class="m-0">メインカテゴリー</p>
@@ -157,7 +157,7 @@
         </div>
 
         <!-- サブカテゴリー追加 -->
-        <div class="mt-4">
+        <div class="mt-3"> <!-- ← mt-4 → mt-3 に調整 -->
             <p class="m-0">サブカテゴリー</p>
 
             <form
@@ -167,7 +167,6 @@
             >
                 {{ csrf_field() }}
 
-                <!-- バリデーションメッセージ -->
                 @if($errors->first('main_category_id'))
                     <span class="error_message">{{ $errors->first('main_category_id') }}</span>
                 @endif
@@ -184,7 +183,6 @@
                     @endforeach
                 </select>
 
-                <!-- バリデーションメッセージ -->
                 @if($errors->first('sub_category_name'))
                     <span class="error_message">{{ $errors->first('sub_category_name') }}</span>
                 @endif

@@ -79,6 +79,7 @@
             ><?php echo e(old('post_body')); ?></textarea>
         </div>
 
+        <!-- 投稿フォーム -->
         <div class="mt-3 text-right">
             <input
                 type="submit"
@@ -99,10 +100,44 @@
 
     </div>
 
+    <!-- コメント追加フォーム（別フォームにする） -->
+    <!--
+    ❌ 課題：コメント投稿欄を削除
+    <div class="category_area w-25 m-5 p-5">
+
+        <div class="">
+            <p class="m-0">コメント</p>
+
+            <?php if($errors->first('comment')): ?>
+                <span class="error_message">
+                    <?php echo e($errors->first('comment')); ?>
+
+                </span>
+            <?php endif; ?>
+
+            <form action="<?php echo e(route('comment.create')); ?>" method="post">
+                <?php echo e(csrf_field()); ?>
+
+
+                <input type="hidden" name="post_id" value="<?php echo e(old('post_id')); ?>">
+
+                <textarea class="w-100" name="comment"><?php echo e(old('comment')); ?></textarea>
+
+                <div class="mt-3 text-right">
+                    <input type="submit" value="コメント追加" class="btn btn-secondary">
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+    -->
+
     <!-- 管理者のみ表示 -->
     <!-- <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('admin')): ?> -->
 
-    <div class="category_area w-25 m-5 p-5">
+    <!-- ⭐ 余白削除：m-5 p-5 → m-5 p-3 に変更 -->
+    <div class="category_area w-25 m-5 p-3">
 
         <div class="">
             <p class="m-0">メインカテゴリー</p>
@@ -139,7 +174,7 @@
         </div>
 
         <!-- サブカテゴリー追加 -->
-        <div class="mt-4">
+        <div class="mt-3"> <!-- ← mt-4 → mt-3 に調整 -->
             <p class="m-0">サブカテゴリー</p>
 
             <form
@@ -150,7 +185,6 @@
                 <?php echo e(csrf_field()); ?>
 
 
-                <!-- バリデーションメッセージ -->
                 <?php if($errors->first('main_category_id')): ?>
                     <span class="error_message"><?php echo e($errors->first('main_category_id')); ?></span>
                 <?php endif; ?>
@@ -168,7 +202,6 @@
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </select>
 
-                <!-- バリデーションメッセージ -->
                 <?php if($errors->first('sub_category_name')): ?>
                     <span class="error_message"><?php echo e($errors->first('sub_category_name')); ?></span>
                 <?php endif; ?>

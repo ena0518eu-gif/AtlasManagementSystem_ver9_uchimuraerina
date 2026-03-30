@@ -55,3 +55,13 @@ jQuery(function ($) {
     }
   });
 });
+// ===============================
+// 選択科目の編集 開閉
+// ===============================
+$('.subject_toggle').on('click', function () {
+  console.log("選択科目の編集クリック");
+
+  const inner = $(this).next('.subject_inner'); // toggleのすぐ下の要素
+  inner.toggleClass('open'); // max-height変更
+  $(this).toggleClass('open'); // 矢印回転
+});

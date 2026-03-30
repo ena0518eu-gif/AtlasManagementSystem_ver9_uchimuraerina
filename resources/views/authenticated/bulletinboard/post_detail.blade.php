@@ -13,14 +13,12 @@
           <div>
             {{-- 編集・削除ボタンは自分の投稿にのみ表示 --}}
             @if(Auth::id() === $post->user_id)
-            {{-- 編集は青ボタン、削除は赤ボタン --}}
             <button class="btn btn-primary btn-sm edit-modal-open mr-2"
               post_title="{{ $post->post_title }}"
               post_body="{{ $post->post }}"
               post_id="{{ $post->id }}">編集</button>
             <form action="{{ route('post.delete', ['id' => $post->id]) }}" method="post" style="display:inline">
               @csrf
-              {{-- 削除確認ダイアログ --}}
               <button type="submit" class="btn btn-danger btn-sm"
                 onclick="return confirm('{{ $post->post_title }}の投稿を削除してよろしいですか？')">削除</button>
             </form>
@@ -34,9 +32,22 @@
             <span>{{ $post->user->under_name }}</span>
             さん
           </p>
-          <span class="ml-5">{{ $post->created_at }}</span>
+
+          {{--  投稿日時削除 --}}
+          <!-- <span class="ml-5">{{ $post->created_at }}</span> -->
         </div>
+
+        {{-- バリデーション表示（本画面） --}}
+        @if($errors->has('post_title'))
+          <p class="text-danger">{{ $errors->first('post_title') }}</p>
+        @endif
+
         <div class="detsail_post_title">{{ $post->post_title }}</div>
+
+        @if($errors->has('post_body'))
+          <p class="text-danger">{{ $errors->first('post_body') }}</p>
+        @endif
+
         <div class="mt-3 detsail_post">{{ $post->post }}</div>
       </div>
 
@@ -61,14 +72,13 @@
     <div class="comment_container border m-5">
       <div class="comment_area p-3">
 
-        {{-- バリデーションメッセージをラベルの上に --}}
+        {{-- バリデーションメッセージ --}}
         @if($errors->has('comment'))
           <p class="text-danger m-0">{{ $errors->first('comment') }}</p>
         @endif
 
         <p class="m-0">コメントする</p>
 
-        <!-- ★ここ修正：formで囲む -->
         <form action="{{ route('comment.create') }}" method="post">
           {{ csrf_field() }}
 
@@ -91,18 +101,26 @@
     <form action="{{ route('post.edit') }}" method="post">
       <div class="w-100">
         <div class="modal-inner-title w-50 m-auto">
-          {{-- バリデーションメッセージをラベルの上に --}}
+
+          {{-- モーダル内バリデーション削除 --}}
+          <!--
           @if($errors->has('post_title'))
             <p class="text-danger">{{ $errors->first('post_title') }}</p>
           @endif
+          -->
+
           <input type="text" name="post_title" placeholder="タイトル" class="w-100"
             value="{{ old('post_title', $post->post_title) }}">
         </div>
         <div class="modal-inner-body w-50 m-auto pt-3 pb-3">
-          {{-- バリデーションメッセージをラベルの上に --}}
+
+          {{--  モーダル内バリデーション削除 --}}
+          <!--
           @if($errors->has('post_body'))
             <p class="text-danger">{{ $errors->first('post_body') }}</p>
           @endif
+          -->
+
           <textarea placeholder="投稿内容" name="post_body" class="w-100">{{ old('post_body', $post->post) }}</textarea>
         </div>
         <div class="w-50 m-auto edit-modal-btn d-flex">
@@ -116,7 +134,7 @@
   </div>
 </div>
 
-{{-- 編集ボタンをクリックしたときにモーダルを開く --}}
+{{-- 編集ボタン --}}
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const editModalButton = document.querySelector('.edit-modal-open');
@@ -140,10 +158,9 @@
   });
 </script>
 
-{{-- バリデーションエラー時にモーダルを自動で開かない --}}
+{{-- バリデーション時の自動モーダル表示削除 --}}
 {{-- @if($errors->has('post_title') || $errors->has('post_body')) --}}
 <script>
-  // コメントアウトしたバリデーションエラー時の自動モーダル表示を削除しました。
 </script>
 {{-- @endif --}}
 

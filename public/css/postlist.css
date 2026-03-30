@@ -38,11 +38,10 @@
 /* サブカテゴリ */
 .sub_categories li {
   padding: 3px 0;
+  padding-left: 15px;
   font-size: 12px;
   border-bottom: 1px solid #ddd;
-  /* ← 追加：下線 */
   margin-right: 20px;
-  /* ← 追加：右側を短く */
 }
 
 /* 開いた状態 */
@@ -59,7 +58,7 @@
   border: none;
 }
 
-/* タイトル（線の中に置く） */
+/* タイトル */
 .category_title {
   font-weight: 500;
   font-size: 13px;
@@ -67,7 +66,6 @@
   margin: 15px 0 10px;
   padding-top: 10px;
   border-top: none;
-  /* ← 1px solid #ccc → none に変更 */
 }
 
 /* 投稿ボタン */
@@ -87,18 +85,16 @@
 .search_area {
   display: flex;
   gap: 0;
-  /* ← 5px から 0 に変更 */
   margin-top: 5px;
 }
 
-/* 検索input（さらに弱く） */
+/* 検索input */
 .search_area input[type="text"] {
   flex: 1;
   padding: 5px 8px;
   font-size: 12px;
   border: 1px solid #ddd;
   border-radius: 6px 0 0 6px;
-  /* ← 右側の角を0に変更してボタンとくっつける */
   outline: none;
   background: #fff;
 }
@@ -115,7 +111,6 @@
   border: none;
   padding: 5px 10px;
   border-radius: 0 3px 3px 0;
-  /* ← 左側の角を0に変更してinputとくっつける */
   font-size: 12px;
 }
 
@@ -155,9 +150,9 @@
 /* サブカテゴリ */
 .sub_categories li {
   padding: 3px 0;
+  padding-left: 15px;
   font-size: 12px;
   border-bottom: 1px solid #ddd;
-  /* ← 追加：下線 */
 }
 
 /* チェックボックス */
@@ -171,7 +166,6 @@
   display: flex;
   gap: 10px;
   border-bottom: none;
-  /* ← 追加 */
 }
 
 /* 横並び */

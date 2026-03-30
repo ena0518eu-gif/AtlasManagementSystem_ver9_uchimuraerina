@@ -125,9 +125,11 @@
   margin-bottom: 6px;
 }
 
-/* セレクトボックス*/
+/* ===============================
+   ★修正① カテゴリ・並び替え幅を1/3
+================================= */
 .search_area select {
-  width: 100%;
+  width: 33%;
   padding: 7px 10px;
   border: none;
   border-radius: 4px;
@@ -146,7 +148,9 @@
    アコーディオン（検索条件の追加）
 ================================= */
 
-/* 検索条件の追加 */
+/* ===============================
+   ★修正② 下線だけにする
+================================= */
 .search_conditions_toggle {
   display: flex;
   justify-content: space-between;
@@ -155,17 +159,17 @@
   font-size: 13px;
   font-weight: bold;
   color: #134074;
-  background: #ECF1F6;
-  border: 1px solid #B0BEC5;
-  border-bottom: none;
-  border-radius: 4px 4px 0 0;
-  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #B0BEC5;
+  border-radius: 0;
+  padding: 8px 0;
   margin-bottom: 0;
   user-select: none;
 }
 
 .search_conditions_toggle:hover {
-  background: #DDE4EC;
+  background: transparent;
 }
 
 /* 矢印 */
@@ -192,10 +196,8 @@
 .search_conditions_inner {
   display: none;
   background: #ECF1F6;
-  border: 1px solid #B0BEC5;
-  border-top: none;
-  border-radius: 0 0 4px 4px;
-  padding: 14px 12px;
+  border: none;
+  padding: 14px 0;
   font-size: 12px;
   margin-bottom: 12px;
 }
@@ -208,7 +210,7 @@
   margin-bottom: 0;
 }
 
-/* アコーディオン内ラベル（性別・権限・選択科目）
+/* アコーディオン内ラベル（性別・権限・選択科目） */
 .search_conditions_inner>div>label,
 .search_conditions_inner label:not(.subject_box label) {
   font-size: 13px;
@@ -218,9 +220,11 @@
   margin-bottom: 6px;
 }
 
-/* 権限セレクト */
+/* ===============================
+   ★修正③ 権限selectだけ幅50%
+================================= */
 .search_conditions_inner select {
-  width: 100%;
+  width: 50%;
   padding: 7px 10px;
   border: none;
   border-radius: 4px;

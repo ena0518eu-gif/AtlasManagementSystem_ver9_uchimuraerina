@@ -21,12 +21,14 @@
         <!-- カレンダー表示 -->
         <?php echo $calendar->render(); ?>
 
+        <!-- ★ ここでカレンダー本体の中に部数リンクが既に生成されている想定 -->
 
       </div>
-    <!-- ★ 送信ボタン右寄せ -->
-    <div style="text-align:right; margin-top:20px;">
-      <button type="submit" class="btn btn-primary">予約する</button>
-    </div>
+
+      <!-- ★ 送信ボタン右寄せ -->
+      <div style="text-align:right; margin-top:20px;">
+        <button type="submit" class="btn btn-primary">予約する</button>
+      </div>
 
     </div>
 

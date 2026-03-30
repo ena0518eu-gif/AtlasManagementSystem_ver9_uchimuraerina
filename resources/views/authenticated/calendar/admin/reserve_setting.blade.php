@@ -14,7 +14,7 @@
     </div>
 
     <!-- 登録ボタン：カレンダー幅に合わせて右寄せ -->
-    <div style="text-align:right; margin-top:20px;">
+    <div style="text-align:right; margin-top:10px; /* ← 上下余白を少し詰める */">
       <button type="submit" form="reserveSetting" class="btn btn-primary"
         onclick="return confirm('予約枠を登録してよろしいですか？')">登録</button>
     </div>

@@ -8,6 +8,21 @@
   font-weight: bold;
 }
 
+/* ← 追加：各項目の余白 */
+.sidebar p {
+  margin-top: 20px;
+  /* 上の余白 */
+  margin-left: 10px;
+  /* 左の余白 */
+}
+
+/* ← 追加：リンク全体の見た目調整 */
+.sidebar a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+}
+
 /* ===============================
    メインコンテンツ
 ================================ */

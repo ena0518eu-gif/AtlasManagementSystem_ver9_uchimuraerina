@@ -330,3 +330,43 @@ li {
 .subject_inner {
   display: none;
 }
+
+/* ================= ここから課題修正 ================= */
+
+/* 投稿者名 → グレー */
+.post_user {
+  color: #999;
+  font-size: 12px;
+}
+
+/* タイトル → 黒太字 */
+.post_area a {
+  color: #000;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* サブカテゴリ → サイドバーと同じ色 */
+.category_box {
+  background-color: #03AAD2;
+  color: #fff;
+}
+
+/* アイコン右寄せ */
+.post_bottom_area {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* アイコン高さ揃える */
+.post_status {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* サブカテゴリ（検索）右にずらす */
+.sub_categories li {
+  padding-left: 15px;
+}

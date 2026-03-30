@@ -7,19 +7,14 @@ document.addEventListener("DOMContentLoaded", function () {
   toggles.forEach(function (toggle) {
 
     const inner = toggle.nextElementSibling; // ← 対応する中身
-    const arrow = toggle.querySelector(".arrow");
 
-    console.log(toggle, inner, arrow);
+    console.log(toggle, inner);
 
     toggle.addEventListener("click", function () {
 
+      // 開閉
       inner.classList.toggle("open");
-
-      if (inner.classList.contains("open")) {
-        arrow.textContent = "▲";
-      } else {
-        arrow.textContent = "▼";
-      }
+      toggle.classList.toggle("open"); // ← 矢印回転用
 
     });
 

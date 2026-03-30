@@ -15,35 +15,63 @@
     <!-- <p class="w-75 m-auto">投稿一覧</p> -->
     <?php $__currentLoopData = $posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <div class="post_area border w-75 m-auto p-3">
-      <p><span><?php echo e($post->user->over_name); ?></span><span class="ml-3"><?php echo e($post->user->under_name); ?></span>さん</p>
-      <p><a href="<?php echo e(route('post.detail', ['id' => $post->id])); ?>"><?php echo e($post->post_title); ?></a></p>
 
-      <!-- サブカテゴリー表示 -->
-      <div class="mb-2">
-        <?php $__currentLoopData = $post->subCategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $postSubCategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-          <?php if($postSubCategory->subCategory): ?>
-            <span class="category_box"><?php echo e($postSubCategory->subCategory->sub_category); ?></span>
-          <?php endif; ?>
-        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-      </div>
+      <!-- 投稿者名（← クラス追加） -->
+      <p class="post_user">
+        <span><?php echo e($post->user->over_name); ?></span>
+        <span class="ml-3"><?php echo e($post->user->under_name); ?></span>さん
+      </p>
 
-      <div class="post_bottom_area d-flex">
+      <!-- タイトル -->
+      <p>
+        <a href="<?php echo e(route('post.detail', ['id' => $post->id])); ?>">
+          <?php echo e($post->post_title); ?>
+
+        </a>
+      </p>
+
+      <!-- サブカテゴリー表示 ＋ アイコンを同じ行に -->
+      <div class="mb-2 d-flex justify-content-between align-items-center">
+
+        <!-- サブカテゴリ -->
+        <div>
+          <?php $__currentLoopData = $post->subCategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $postSubCategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php if($postSubCategory->subCategory): ?>
+              <span class="category_box">
+                <?php echo e($postSubCategory->subCategory->sub_category); ?>
+
+              </span>
+            <?php endif; ?>
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        </div>
+
+        <!-- アイコン（右寄せ＆同じ高さ） -->
         <div class="d-flex post_status">
-          <div class="mr-5">
+          <div class="mr-3">
             <!-- コメント数表示 -->
-            <i class="fa fa-comment"></i><span><?php echo e($post->postComments->count()); ?></span>
+            <i class="fa fa-comment"></i>
+            <span><?php echo e($post->postComments->count()); ?></span>
           </div>
+
           <div>
             <?php if(Auth::user()->is_Like($post->id)): ?>
             <!-- いいね済み（赤ハート）＋いいね数 -->
-            <p class="m-0"><i class="fas fa-heart un_like_btn" post_id="<?php echo e($post->id); ?>"></i><span class="like_counts<?php echo e($post->id); ?>"><?php echo e($post->likes->count()); ?></span></p>
+            <p class="m-0">
+              <i class="fas fa-heart un_like_btn" post_id="<?php echo e($post->id); ?>"></i>
+              <span class="like_counts<?php echo e($post->id); ?>"><?php echo e($post->likes->count()); ?></span>
+            </p>
             <?php else: ?>
             <!-- 未いいね（白ハート）＋いいね数 -->
-            <p class="m-0"><i class="fas fa-heart like_btn" post_id="<?php echo e($post->id); ?>"></i><span class="like_counts<?php echo e($post->id); ?>"><?php echo e($post->likes->count()); ?></span></p>
+            <p class="m-0">
+              <i class="fas fa-heart like_btn" post_id="<?php echo e($post->id); ?>"></i>
+              <span class="like_counts<?php echo e($post->id); ?>"><?php echo e($post->likes->count()); ?></span>
+            </p>
             <?php endif; ?>
           </div>
         </div>
+
       </div>
+
     </div>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
   </div>

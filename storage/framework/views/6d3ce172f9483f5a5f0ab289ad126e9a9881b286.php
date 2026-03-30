@@ -21,14 +21,12 @@
           <div>
             
             <?php if(Auth::id() === $post->user_id): ?>
-            
             <button class="btn btn-primary btn-sm edit-modal-open mr-2"
               post_title="<?php echo e($post->post_title); ?>"
               post_body="<?php echo e($post->post); ?>"
               post_id="<?php echo e($post->id); ?>">編集</button>
             <form action="<?php echo e(route('post.delete', ['id' => $post->id])); ?>" method="post" style="display:inline">
               <?php echo csrf_field(); ?>
-              
               <button type="submit" class="btn btn-danger btn-sm"
                 onclick="return confirm('<?php echo e($post->post_title); ?>の投稿を削除してよろしいですか？')">削除</button>
             </form>
@@ -42,9 +40,22 @@
             <span><?php echo e($post->user->under_name); ?></span>
             さん
           </p>
-          <span class="ml-5"><?php echo e($post->created_at); ?></span>
+
+          
+          <!-- <span class="ml-5"><?php echo e($post->created_at); ?></span> -->
         </div>
+
+        
+        <?php if($errors->has('post_title')): ?>
+          <p class="text-danger"><?php echo e($errors->first('post_title')); ?></p>
+        <?php endif; ?>
+
         <div class="detsail_post_title"><?php echo e($post->post_title); ?></div>
+
+        <?php if($errors->has('post_body')): ?>
+          <p class="text-danger"><?php echo e($errors->first('post_body')); ?></p>
+        <?php endif; ?>
+
         <div class="mt-3 detsail_post"><?php echo e($post->post); ?></div>
       </div>
 
@@ -76,7 +87,6 @@
 
         <p class="m-0">コメントする</p>
 
-        <!-- ★ここ修正：formで囲む -->
         <form action="<?php echo e(route('comment.create')); ?>" method="post">
           <?php echo e(csrf_field()); ?>
 
@@ -100,18 +110,26 @@
     <form action="<?php echo e(route('post.edit')); ?>" method="post">
       <div class="w-100">
         <div class="modal-inner-title w-50 m-auto">
+
           
+          <!--
           <?php if($errors->has('post_title')): ?>
             <p class="text-danger"><?php echo e($errors->first('post_title')); ?></p>
           <?php endif; ?>
+          -->
+
           <input type="text" name="post_title" placeholder="タイトル" class="w-100"
             value="<?php echo e(old('post_title', $post->post_title)); ?>">
         </div>
         <div class="modal-inner-body w-50 m-auto pt-3 pb-3">
+
           
+          <!--
           <?php if($errors->has('post_body')): ?>
             <p class="text-danger"><?php echo e($errors->first('post_body')); ?></p>
           <?php endif; ?>
+          -->
+
           <textarea placeholder="投稿内容" name="post_body" class="w-100"><?php echo e(old('post_body', $post->post)); ?></textarea>
         </div>
         <div class="w-50 m-auto edit-modal-btn d-flex">
@@ -153,7 +171,6 @@
 
 
 <script>
-  // コメントアウトしたバリデーションエラー時の自動モーダル表示を削除しました。
 </script>
 
 
