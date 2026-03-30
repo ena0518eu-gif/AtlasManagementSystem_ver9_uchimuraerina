@@ -68,15 +68,26 @@
   <div class="w-50 p-3">
     <div class="comment_container border m-5">
       <div class="comment_area p-3">
+
         
         <?php if($errors->has('comment')): ?>
           <p class="text-danger m-0"><?php echo e($errors->first('comment')); ?></p>
         <?php endif; ?>
+
         <p class="m-0">コメントする</p>
-        <textarea class="w-100" name="comment" form="commentRequest"></textarea>
-        <input type="hidden" name="post_id" form="commentRequest" value="<?php echo e($post->id); ?>">
-        <input type="submit" class="btn btn-primary" form="commentRequest" value="投稿">
-        <form action="<?php echo e(route('comment.create')); ?>" method="post" id="commentRequest"><?php echo e(csrf_field()); ?></form>
+
+        <!-- ★ここ修正：formで囲む -->
+        <form action="<?php echo e(route('comment.create')); ?>" method="post">
+          <?php echo e(csrf_field()); ?>
+
+
+          <textarea class="w-100" name="comment"><?php echo e(old('comment')); ?></textarea>
+
+          <input type="hidden" name="post_id" value="<?php echo e($post->id); ?>">
+
+          <input type="submit" class="btn btn-primary" value="投稿">
+        </form>
+
       </div>
     </div>
   </div>
@@ -94,18 +105,18 @@
             <p class="text-danger"><?php echo e($errors->first('post_title')); ?></p>
           <?php endif; ?>
           <input type="text" name="post_title" placeholder="タイトル" class="w-100"
-            value="<?php echo e(old('post_title', $post->post_title)); ?>"> 
+            value="<?php echo e(old('post_title', $post->post_title)); ?>">
         </div>
         <div class="modal-inner-body w-50 m-auto pt-3 pb-3">
           
           <?php if($errors->has('post_body')): ?>
             <p class="text-danger"><?php echo e($errors->first('post_body')); ?></p>
           <?php endif; ?>
-          <textarea placeholder="投稿内容" name="post_body" class="w-100"><?php echo e(old('post_body', $post->post)); ?></textarea> 
+          <textarea placeholder="投稿内容" name="post_body" class="w-100"><?php echo e(old('post_body', $post->post)); ?></textarea>
         </div>
         <div class="w-50 m-auto edit-modal-btn d-flex">
           <a class="js-modal-close btn btn-danger d-inline-block" href="">閉じる</a>
-          <input type="hidden" class="edit-modal-hidden" name="post_id" value="<?php echo e($post->id); ?>"> 
+          <input type="hidden" class="edit-modal-hidden" name="post_id" value="<?php echo e($post->id); ?>">
           <input type="submit" class="btn btn-primary d-block" value="編集">
         </div>
       </div>
@@ -122,20 +133,18 @@
     const modal = document.querySelector('.modal');
     const closeModalButton = document.querySelector('.js-modal-close');
 
-    // 編集ボタンがクリックされたらモーダルを表示
     if (editModalButton) {
       editModalButton.addEventListener('click', function() {
-        modal.style.display = 'block';  // モーダルを表示
+        modal.style.display = 'block';
         document.querySelector('input[name="post_title"]').value = editModalButton.getAttribute('post_title');
         document.querySelector('textarea[name="post_body"]').value = editModalButton.getAttribute('post_body');
         document.querySelector('input[name="post_id"]').value = editModalButton.getAttribute('post_id');
       });
     }
 
-    // モーダルの閉じるボタン
     if (closeModalButton) {
       closeModalButton.addEventListener('click', function() {
-        modal.style.display = 'none';  // モーダルを非表示
+        modal.style.display = 'none';
       });
     }
   });

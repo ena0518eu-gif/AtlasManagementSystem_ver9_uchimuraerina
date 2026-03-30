@@ -7,3 +7,25 @@
   background-color: #03AAD2;
   font-weight: bold;
 }
+
+/* ===============================
+   メインコンテンツ
+================================ */
+.main-container {
+  flex: 1;
+  /* ← サイドバー以外の幅を全部使う */
+  padding: 20px;
+  /* ← ページ全体の余白 */
+  box-sizing: border-box;
+  /* ← padding込みで幅計算 */
+}
+
+/* ===============================
+   カレンダー位置調整
+================================ */
+.main-container .calendar_area {
+  margin-left: auto;
+  margin-right: auto;
+  /* ← 常に中央揃え */
+
+}

@@ -104,6 +104,9 @@
             <form action="{{ route('comment.create') }}" method="post">
                 {{ csrf_field() }}
 
+                <!-- ★追加：post_id -->
+                <input type="hidden" name="post_id" value="{{ old('post_id') }}">
+
                 <textarea class="w-100" name="comment">{{ old('comment') }}</textarea>
 
                 <div class="mt-3 text-right">

@@ -3,45 +3,70 @@
 
 /* カレンダー外枠 */
 .calendar_area {
-  width: 1800px;
-  /* ← 広げる（900→1100） */
+  width: 100%;
+  max-width: 1400px;
+  /* ← 最大幅だけ制限 */
   margin: 40px auto;
   background: #fff;
   border-radius: 6px;
-  padding: 30px;
-  /* ← 余白増やす */
+  padding: 5px;
+  /* ← 10px → 5px（余白削減） */
   border: 1px solid #ddd;
+  box-sizing: border-box;
+  /* ← 追加：はみ出し防止 */
 }
 
 /* ===============================
    カレンダー本体（Laravel実構造）
 ================================ */
+.calendar {
+  width: 100%;
+  /* ← 追加：親いっぱいに広げる */
+  margin: 0;
+  /* ← 追加：中央寄せ解除 */
+}
+
 .calendar table {
   width: 100%;
+  margin: 0;
+  /* ← 追加：余白削除（重要） */
   border-collapse: collapse;
   table-layout: fixed;
+  /* ← 列幅均等化 */
 }
 
 /* 曜日ヘッダー */
 .calendar th {
   border: 1px solid #ddd;
-  padding: 10px;
-  /* ← 少し広げる */
+  padding: 8px;
+  /* ← 少し詰める */
   background-color: #f5f5f5;
   font-weight: bold;
   font-size: 13px;
-  /* ← 少し大きく */
   text-align: center;
+  width: calc(100% / 7);
+  /* ← 横幅均等 */
 }
 
 /* 日付マス */
 .calendar td {
   border: 1px solid #ddd;
   height: 130px;
-  /* ← 高さアップ */
   vertical-align: top;
-  padding: 5px;
+  padding: 2px;
+  /* ← 余白削減（重要） */
   position: relative;
+  width: calc(100% / 7);
+  /* ← 横幅均等 */
+}
+
+/* 空白セルの余白削除 */
+.day-blank {
+  padding: 0 !important;
+}
+
+.day-blank .adjust-area {
+  display: none;
 }
 
 /* ===============================
@@ -50,8 +75,7 @@
 .day {
   font-size: 13px;
   text-align: center;
-  margin-bottom: 8px;
-  /* ← 下のコンテンツとの余白 */
+  margin-bottom: 6px;
 }
 
 /* ===============================
@@ -170,7 +194,9 @@ select.form-control-sm {
 
 /* 部数エリアの左右余白 */
 .part-counts {
-  padding: 10% 30% 10% 30%;
+  padding: 10% 15% 10% 15%;
+  /* ← さらに詰める（重要） */
+  /* ← 30% → 20% → 15% に縮小 */
 }
 
 /* 部数と枠数の間隔 */
@@ -179,7 +205,8 @@ select.form-control-sm {
   justify-content: flex-start;
   font-size: 11px;
   margin: 0;
-  gap: 40px;
+  gap: 15px;
+  /* ← 40px → 20px → 15px */
 }
 
 /* 部数リンク */

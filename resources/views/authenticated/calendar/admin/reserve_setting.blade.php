@@ -4,18 +4,20 @@
 
   {{-- w-75 m-auto を削除 → calendar_area クラスで幅管理 --}}
   <div class="calendar_area">
-    <div class="w-100">
+
+    <!-- ★ 余計な余白を防ぐためにスタイル追加 -->
+    <div class="w-100" style="margin:0; padding:0;">
       <p class="calendar-title">{{ $calendar->getTitle() }}</p>
 
       <!-- カレンダー表示 -->
       {!! $calendar->render() !!}
-
     </div>
-      <!-- 登録ボタン：calendar_area の max-width に合わせて右寄せ -->
-  <div style="text-align:right; max-width: 1400px; width: calc(100% - 40px); margin: 20px auto; padding-right: 10px;">
-    <button type="submit" form="reserveSetting" class="btn btn-primary"
-      onclick="return confirm('予約枠を登録してよろしいですか？')">登録</button>
-  </div>
+
+    <!-- 登録ボタン：カレンダー幅に合わせて右寄せ -->
+    <div style="text-align:right; margin-top:20px;">
+      <button type="submit" form="reserveSetting" class="btn btn-primary"
+        onclick="return confirm('予約枠を登録してよろしいですか？')">登録</button>
+    </div>
 
   </div>
 
