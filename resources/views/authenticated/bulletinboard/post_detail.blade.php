@@ -37,16 +37,20 @@
           <!-- <span class="ml-5">{{ $post->created_at }}</span> -->
         </div>
 
-        {{-- バリデーション表示（本画面） --}}
+        {{-- バリデーション表示（本画面）削除対象 --}}
+        {{--
         @if($errors->has('post_title'))
           <p class="text-danger">{{ $errors->first('post_title') }}</p>
         @endif
+        --}}
 
         <div class="detsail_post_title">{{ $post->post_title }}</div>
 
+        {{--
         @if($errors->has('post_body'))
           <p class="text-danger">{{ $errors->first('post_body') }}</p>
         @endif
+        --}}
 
         <div class="mt-3 detsail_post">{{ $post->post }}</div>
       </div>
@@ -100,34 +104,36 @@
   <div class="modal__content">
     <form action="{{ route('post.edit') }}" method="post">
       <div class="w-100">
+
         <div class="modal-inner-title w-50 m-auto">
 
-          {{-- モーダル内バリデーション削除 --}}
-          <!--
-          @if($errors->has('post_title'))
-            <p class="text-danger">{{ $errors->first('post_title') }}</p>
-          @endif
-          -->
+          {{-- モーダル内バリデーション（ラベルの上に表示） --}}
+          @error('post_title')
+            <p class="text-danger">{{ $message }}</p>
+          @enderror
 
-          <input type="text" name="post_title" placeholder="タイトル" class="w-100"
+          <label for="post_title">タイトル</label>
+          <input id="post_title" type="text" name="post_title" class="w-100"
             value="{{ old('post_title', $post->post_title) }}">
         </div>
+
         <div class="modal-inner-body w-50 m-auto pt-3 pb-3">
 
-          {{--  モーダル内バリデーション削除 --}}
-          <!--
-          @if($errors->has('post_body'))
-            <p class="text-danger">{{ $errors->first('post_body') }}</p>
-          @endif
-          -->
+          {{-- モーダル内バリデーション（ラベルの上に表示） --}}
+          @error('post_body')
+            <p class="text-danger">{{ $message }}</p>
+          @enderror
 
-          <textarea placeholder="投稿内容" name="post_body" class="w-100">{{ old('post_body', $post->post) }}</textarea>
+          <label for="post_body">投稿内容</label>
+          <textarea id="post_body" name="post_body" class="w-100">{{ old('post_body', $post->post) }}</textarea>
         </div>
+
         <div class="w-50 m-auto edit-modal-btn d-flex">
           <a class="js-modal-close btn btn-danger d-inline-block" href="">閉じる</a>
           <input type="hidden" class="edit-modal-hidden" name="post_id" value="{{ $post->id }}">
           <input type="submit" class="btn btn-primary d-block" value="編集">
         </div>
+
       </div>
       {{ csrf_field() }}
     </form>
@@ -158,10 +164,13 @@
   });
 </script>
 
-{{-- バリデーション時の自動モーダル表示削除 --}}
-{{-- @if($errors->has('post_title') || $errors->has('post_body')) --}}
+{{-- バリデーション時の自動モーダル表示 --}}
+@if($errors->has('post_title') || $errors->has('post_body'))
 <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.modal').style.display = 'block';
+  });
 </script>
-{{-- @endif --}}
+@endif
 
 </x-sidebar>

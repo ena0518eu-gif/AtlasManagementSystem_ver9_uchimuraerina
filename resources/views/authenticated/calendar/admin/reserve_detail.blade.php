@@ -7,7 +7,7 @@
     <!-- <h5>{{ $date }} {{ $part == 1 ? 'リモ1部' : ($part == 2 ? 'リモ2部' : 'リモ3部') }} 予約者一覧</h5> -->
 
 
-  <table class="table mt-3 table-bordered table-striped">
+  <table class="table mt-3 table-bordered table-striped rounded shadow">
     <thead class="thead-custom">
       <tr>
         <th>ID</th>

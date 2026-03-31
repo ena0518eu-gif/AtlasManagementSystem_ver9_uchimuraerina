@@ -84,12 +84,12 @@
 <!-- メイン -->
 <div class="main-container">
 
-<div class="vh-100 border">
+<div class="vh-100">
   <!-- 左寄せ専用クラスを追加 -->
   <div class="top_area profile-left w-75 pt-5">
 
     <!-- タイトル -->
-    <div class="profile_title">
+    <div class="title">
       <span>{{ $user->over_name }}</span>
       <span>{{ $user->under_name }}さんのプロフィール</span>
     </div>

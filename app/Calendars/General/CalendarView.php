@@ -59,7 +59,7 @@ class CalendarView{
           }else if($reservePart == 3){
             $reservePartLabel = "リモ3部";
           }
-          if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
+          if($startDay <= $day->everyDay() && $toDay > $day->everyDay()){
             // 過去の予約済み日は参加した部を表示
             $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">' . $reservePartLabel . '参加</p>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';

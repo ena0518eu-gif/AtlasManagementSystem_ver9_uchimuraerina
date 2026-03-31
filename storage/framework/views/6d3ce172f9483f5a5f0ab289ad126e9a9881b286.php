@@ -46,15 +46,11 @@
         </div>
 
         
-        <?php if($errors->has('post_title')): ?>
-          <p class="text-danger"><?php echo e($errors->first('post_title')); ?></p>
-        <?php endif; ?>
+        
 
         <div class="detsail_post_title"><?php echo e($post->post_title); ?></div>
 
-        <?php if($errors->has('post_body')): ?>
-          <p class="text-danger"><?php echo e($errors->first('post_body')); ?></p>
-        <?php endif; ?>
+        
 
         <div class="mt-3 detsail_post"><?php echo e($post->post); ?></div>
       </div>
@@ -109,34 +105,50 @@
   <div class="modal__content">
     <form action="<?php echo e(route('post.edit')); ?>" method="post">
       <div class="w-100">
+
         <div class="modal-inner-title w-50 m-auto">
 
           
-          <!--
-          <?php if($errors->has('post_title')): ?>
-            <p class="text-danger"><?php echo e($errors->first('post_title')); ?></p>
-          <?php endif; ?>
-          -->
+          <?php $__errorArgs = ['post_title'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+            <p class="text-danger"><?php echo e($message); ?></p>
+          <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
 
-          <input type="text" name="post_title" placeholder="タイトル" class="w-100"
+          <label for="post_title">タイトル</label>
+          <input id="post_title" type="text" name="post_title" class="w-100"
             value="<?php echo e(old('post_title', $post->post_title)); ?>">
         </div>
+
         <div class="modal-inner-body w-50 m-auto pt-3 pb-3">
 
           
-          <!--
-          <?php if($errors->has('post_body')): ?>
-            <p class="text-danger"><?php echo e($errors->first('post_body')); ?></p>
-          <?php endif; ?>
-          -->
+          <?php $__errorArgs = ['post_body'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+            <p class="text-danger"><?php echo e($message); ?></p>
+          <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
 
-          <textarea placeholder="投稿内容" name="post_body" class="w-100"><?php echo e(old('post_body', $post->post)); ?></textarea>
+          <label for="post_body">投稿内容</label>
+          <textarea id="post_body" name="post_body" class="w-100"><?php echo e(old('post_body', $post->post)); ?></textarea>
         </div>
+
         <div class="w-50 m-auto edit-modal-btn d-flex">
           <a class="js-modal-close btn btn-danger d-inline-block" href="">閉じる</a>
           <input type="hidden" class="edit-modal-hidden" name="post_id" value="<?php echo e($post->id); ?>">
           <input type="submit" class="btn btn-primary d-block" value="編集">
         </div>
+
       </div>
       <?php echo e(csrf_field()); ?>
 
@@ -169,10 +181,13 @@
 </script>
 
 
-
+<?php if($errors->has('post_title') || $errors->has('post_body')): ?>
 <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.modal').style.display = 'block';
+  });
 </script>
-
+<?php endif; ?>
 
  <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
